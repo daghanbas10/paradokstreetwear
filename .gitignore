@@ -19,3 +19,7 @@ Thumbs.db
 rebrand.js
 fix-dates.js
 generate-ssl.js
+
+# Git tools (local only)
+mingit/
+mingit.zip
