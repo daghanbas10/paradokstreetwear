@@ -1,0 +1,83 @@
+<%- include('../partials/header') %>
+
+<!-- Blog Detay -->
+<section class="blog-detail section">
+    <div class="container">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="/">Ana Sayfa</a>
+                </li>
+                <li class="breadcrumb-separator">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="/blog">Blog</a>
+                </li>
+                <li class="breadcrumb-separator">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </li>
+                <li class="breadcrumb-item breadcrumb-current" aria-current="page">
+                    <%= post.title %>
+                </li>
+            </ol>
+        </nav>
+
+        <article class="blog-detail-article">
+            <!-- Kapak Resmi -->
+            <% if (post.cover_image) { %>
+                <div class="blog-detail-cover">
+                    <img src="<%= post.cover_image %>" alt="<%= post.title %>" loading="lazy">
+                </div>
+            <% } %>
+
+            <!-- Başlık ve Meta -->
+            <header class="blog-detail-header">
+                <h1 class="blog-detail-title"><%= post.title %></h1>
+                <div class="blog-detail-meta">
+                    <span class="blog-detail-date">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        <%= post.created_at ? new Date(post.created_at).toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' }) : '' %>
+                    </span>
+                    <% if (post.author) { %>
+                        <span class="blog-detail-author">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                            <%= post.author %>
+                        </span>
+                    <% } %>
+                </div>
+            </header>
+
+            <!-- İçerik -->
+            <div class="blog-detail-content prose">
+                <%- post.content %>
+            </div>
+
+            <!-- Alt Navigasyon -->
+            <footer class="blog-detail-footer">
+                <a href="/blog" class="btn btn-outline">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"/>
+                        <polyline points="12 19 5 12 12 5"/>
+                    </svg>
+                    <span>Blog'a Dön</span>
+                </a>
+            </footer>
+        </article>
+    </div>
+</section>
+
+<%- include('../partials/footer') %>

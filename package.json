@@ -1,0 +1,25 @@
+{
+  "name": "hizmet-tanitim-sitesi",
+  "version": "1.0.0",
+  "description": "Hizmet tanıtım web sitesi - müşteri iletişim ve yönetim paneli",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "seed": "node seed.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.6",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "express-rate-limit": "^8.5.2",
+    "express-session": "^1.18.1",
+    "helmet": "^8.2.0",
+    "hpp": "^0.2.3",
+    "multer": "^1.4.5-lts.1",
+    "selfsigned": "^5.5.0",
+    "sql.js": "^1.12.0"
+  }
+}

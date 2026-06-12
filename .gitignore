@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+
+# Database
+database/*.db
+
+# SSL certificates
+ssl/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temp/script files
+*.log
+rebrand.js
+fix-dates.js
+generate-ssl.js

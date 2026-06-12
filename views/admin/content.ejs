@@ -1,0 +1,169 @@
+<%- include('partials/admin-header') %>
+
+<!-- İçerik Yönetimi Başlık -->
+<div class="admin-page-header">
+    <div class="admin-page-header-left">
+        <h2 class="admin-page-title">İçerik Yönetimi</h2>
+    </div>
+</div>
+
+<!-- Başarı Mesajı -->
+<% if (typeof success !== 'undefined' && success) { %>
+    <div class="admin-alert admin-alert-success">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+        <span>İçerikler başarıyla güncellendi!</span>
+        <button class="admin-alert-close" onclick="this.parentElement.style.display='none'" aria-label="Kapat">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+    </div>
+<% } %>
+
+<!-- İçerik Formu -->
+<div class="content-editor glass-card-admin">
+    <div class="content-editor-header">
+        <h3 class="content-editor-title">Site İçeriklerini Düzenleyin</h3>
+        <p class="content-editor-subtitle">Aşağıdaki alanları düzenleyerek sitenizin içeriklerini güncelleyebilirsiniz.</p>
+    </div>
+
+    <form action="/admin/content" method="POST" class="content-form">
+        <!-- Ana Sayfa Bölümü -->
+        <div class="content-section">
+            <div class="content-section-header">
+                <div class="content-section-icon">🏠</div>
+                <h4 class="content-section-title">Ana Sayfa</h4>
+            </div>
+
+            <div class="admin-form-group">
+                <label for="hero_title" class="admin-form-label">Ana Sayfa Başlık</label>
+                <input 
+                    type="text" 
+                    id="hero_title" 
+                    name="hero_title" 
+                    class="admin-form-input" 
+                    placeholder="Ana sayfa ana başlığı"
+                    value="<%= typeof content !== 'undefined' && content.hero_title ? content.hero_title : '' %>"
+                >
+                <span class="admin-form-hint">Ana sayfadaki hero bölümünde görünen büyük başlık.</span>
+            </div>
+
+            <div class="admin-form-group">
+                <label for="hero_subtitle" class="admin-form-label">Ana Sayfa Alt Başlık</label>
+                <textarea 
+                    id="hero_subtitle" 
+                    name="hero_subtitle" 
+                    class="admin-form-textarea" 
+                    rows="3" 
+                    placeholder="Ana sayfa alt başlık metni"
+                ><%= typeof content !== 'undefined' && content.hero_subtitle ? content.hero_subtitle : '' %></textarea>
+                <span class="admin-form-hint">Ana başlığın altında görünen açıklama metni.</span>
+            </div>
+        </div>
+
+        <!-- Hakkımızda Bölümü -->
+        <div class="content-section">
+            <div class="content-section-header">
+                <div class="content-section-icon">ℹ️</div>
+                <h4 class="content-section-title">Hakkımızda</h4>
+            </div>
+
+            <div class="admin-form-group">
+                <label for="about_text" class="admin-form-label">Hakkımızda Metni</label>
+                <textarea 
+                    id="about_text" 
+                    name="about_text" 
+                    class="admin-form-textarea" 
+                    rows="5" 
+                    placeholder="Hakkımızda bölümünde görünecek metin"
+                ><%= typeof content !== 'undefined' && content.about_text ? content.about_text : '' %></textarea>
+                <span class="admin-form-hint">Ana sayfadaki "Hakkımızda" bölümünde görünen tanıtım metni.</span>
+            </div>
+        </div>
+
+        <!-- İletişim Bilgileri Bölümü -->
+        <div class="content-section">
+            <div class="content-section-header">
+                <div class="content-section-icon">📞</div>
+                <h4 class="content-section-title">İletişim Bilgileri</h4>
+            </div>
+
+            <div class="admin-form-row">
+                <div class="admin-form-group admin-form-group-half">
+                    <label for="contact_email" class="admin-form-label">E-posta Adresi</label>
+                    <input 
+                        type="text" 
+                        id="contact_email" 
+                        name="contact_email" 
+                        class="admin-form-input" 
+                        placeholder="ornek@sirket.com"
+                        value="<%= typeof content !== 'undefined' && content.contact_email ? content.contact_email : '' %>"
+                    >
+                </div>
+
+                <div class="admin-form-group admin-form-group-half">
+                    <label for="contact_phone" class="admin-form-label">Telefon Numarası</label>
+                    <input 
+                        type="text" 
+                        id="contact_phone" 
+                        name="contact_phone" 
+                        class="admin-form-input" 
+                        placeholder="+90 (XXX) XXX XX XX"
+                        value="<%= typeof content !== 'undefined' && content.contact_phone ? content.contact_phone : '' %>"
+                    >
+                </div>
+            </div>
+
+            <div class="admin-form-group">
+                <label for="contact_address" class="admin-form-label">Adres</label>
+                <input 
+                    type="text" 
+                    id="contact_address" 
+                    name="contact_address" 
+                    class="admin-form-input" 
+                    placeholder="Şirket adresi"
+                    value="<%= typeof content !== 'undefined' && content.contact_address ? content.contact_address : '' %>"
+                >
+            </div>
+        </div>
+
+        <!-- Footer Bölümü -->
+        <div class="content-section">
+            <div class="content-section-header">
+                <div class="content-section-icon">📋</div>
+                <h4 class="content-section-title">Footer (Alt Bilgi)</h4>
+            </div>
+
+            <div class="admin-form-group">
+                <label for="footer_text" class="admin-form-label">Footer Metni</label>
+                <input 
+                    type="text" 
+                    id="footer_text" 
+                    name="footer_text" 
+                    class="admin-form-input" 
+                    placeholder="Footer'da görünecek kısa metin"
+                    value="<%= typeof content !== 'undefined' && content.footer_text ? content.footer_text : '' %>"
+                >
+                <span class="admin-form-hint">Sitenin alt kısmında görünen kısa açıklama metni.</span>
+            </div>
+        </div>
+
+        <!-- Kaydet -->
+        <div class="admin-form-actions">
+            <button type="submit" class="btn-admin btn-admin-primary btn-admin-lg">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                    <polyline points="17 21 17 13 7 13 7 21"/>
+                    <polyline points="7 3 7 8 15 8"/>
+                </svg>
+                Değişiklikleri Kaydet
+            </button>
+        </div>
+    </form>
+</div>
+
+<%- include('partials/admin-footer') %>

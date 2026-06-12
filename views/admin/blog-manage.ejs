@@ -1,0 +1,105 @@
+<%- include('partials/admin-header') %>
+
+<!-- Blog Yönetimi Başlık -->
+<div class="admin-page-header">
+    <div class="admin-page-header-left">
+        <h2 class="admin-page-title">Blog Yönetimi</h2>
+    </div>
+    <div class="admin-page-header-right">
+        <a href="/admin/blog/new" class="btn-admin btn-admin-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Yeni Yazı
+        </a>
+    </div>
+</div>
+
+<!-- Blog Yazıları Listesi -->
+<div class="blog-manage-list">
+    <% if (typeof posts !== 'undefined' && posts && posts.length > 0) { %>
+        <div class="admin-table-wrapper glass-card-admin">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Başlık</th>
+                        <th>Durum</th>
+                        <th>Tarih</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% posts.forEach(function(post) { %>
+                        <tr>
+                            <td>
+                                <div class="table-post-info">
+                                    <% if (post.cover_image) { %>
+                                        <div class="table-post-thumb">
+                                            <img src="<%= post.cover_image %>" alt="<%= post.title %>">
+                                        </div>
+                                    <% } %>
+                                    <div class="table-post-details">
+                                        <span class="table-post-title"><%= post.title %></span>
+                                        <% if (post.excerpt) { %>
+                                            <span class="table-post-excerpt"><%= post.excerpt.substring(0, 80) %><%= post.excerpt.length > 80 ? '...' : '' %></span>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <% if (post.is_published) { %>
+                                    <span class="badge badge-success">Yayında</span>
+                                <% } else { %>
+                                    <span class="badge badge-muted">Taslak</span>
+                                <% } %>
+                            </td>
+                            <td>
+                                <span class="table-date">
+                                    <%= post.created_at ? new Date(post.created_at).toLocaleDateString('tr-TR', { year: 'numeric', month: 'short', day: 'numeric' }) : '' %>
+                                </span>
+                            </td>
+                            <td>
+                                <div class="table-actions">
+                                    <a href="/admin/blog/<%= post.id %>/edit" class="btn-admin btn-admin-sm btn-admin-outline" title="Düzenle">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                        </svg>
+                                        Düzenle
+                                    </a>
+                                    <form action="/admin/blog/<%= post.id %>?_method=DELETE" method="POST" class="inline-form" onsubmit="return confirm('Bu yazıyı silmek istediğinize emin misiniz?')">
+                                        <button type="submit" class="btn-admin btn-admin-sm btn-admin-danger" title="Sil">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <polyline points="3 6 5 6 21 6"/>
+                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                                <line x1="10" y1="11" x2="10" y2="17"/>
+                                                <line x1="14" y1="11" x2="14" y2="17"/>
+                                            </svg>
+                                            Sil
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    <% } else { %>
+        <div class="admin-empty-state glass-card-admin">
+            <div class="admin-empty-icon">📝</div>
+            <h3 class="admin-empty-title">Henüz Blog Yazısı Yok</h3>
+            <p class="admin-empty-text">İlk blog yazınızı oluşturmak için yukarıdaki "Yeni Yazı" butonuna tıklayın.</p>
+            <a href="/admin/blog/new" class="btn-admin btn-admin-primary" style="margin-top: 1rem;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                Yeni Yazı Oluştur
+            </a>
+        </div>
+    <% } %>
+</div>
+
+<%- include('partials/admin-footer') %>

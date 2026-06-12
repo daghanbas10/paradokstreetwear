@@ -1,0 +1,38 @@
+<%- include('partials/admin-header') %>
+
+<div class="admin-page-header">
+    <h2 class="admin-page-title">Şifre Değiştir</h2>
+    <p class="admin-page-subtitle">Admin hesabınızın şifresini güncelleyin.</p>
+</div>
+
+<% if (typeof successMessage !== 'undefined' && successMessage) { %>
+    <div class="alert alert-success"><%= successMessage %></div>
+<% } %>
+<% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+    <div class="alert alert-error"><%= errorMessage %></div>
+<% } %>
+
+<div class="admin-form-card glass-card" style="max-width: 500px;">
+    <form action="/admin/settings" method="POST" class="admin-form">
+        <div class="form-group">
+            <label for="currentPassword" class="form-label">Mevcut Şifre</label>
+            <input type="password" id="currentPassword" name="currentPassword" class="form-input" required placeholder="Mevcut şifrenizi girin">
+        </div>
+
+        <div class="form-group">
+            <label for="newPassword" class="form-label">Yeni Şifre</label>
+            <input type="password" id="newPassword" name="newPassword" class="form-input" required placeholder="Yeni şifrenizi girin" minlength="6">
+        </div>
+
+        <div class="form-group">
+            <label for="confirmPassword" class="form-label">Yeni Şifre (Tekrar)</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" required placeholder="Yeni şifrenizi tekrar girin" minlength="6">
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+            Şifreyi Güncelle
+        </button>
+    </form>
+</div>
+
+<%- include('partials/admin-footer') %>
