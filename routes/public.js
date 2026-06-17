@@ -49,7 +49,7 @@ router.get('/', (req, res) => {
 
 // ── Koleksiyon Sayfası ────────────────────────────────────────────────────
 
-router.get('/hizmetler', (req, res) => {
+router.get('/koleksiyon', (req, res) => {
   const content = getSiteContent([
     'hero_title',
     'hero_subtitle',
@@ -62,6 +62,11 @@ router.get('/hizmetler', (req, res) => {
     title: 'Yaz Koleksiyonu 2026 | PARADOKS Streetwear',
     content
   });
+});
+
+// Eski URL'den 301 redirect
+router.get('/hizmetler', (req, res) => {
+  res.redirect(301, '/koleksiyon');
 });
 
 // ── Blog Sayfası ───────────────────────────────────────────────────
