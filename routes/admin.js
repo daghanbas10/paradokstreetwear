@@ -91,40 +91,38 @@ router.get('/admin/login', (req, res) => {
 router.post('/admin/login', (req, res) => {
   const { username, password } = req.body;
 
-  console.log('[LOGIN] Deneme:', username);
+  console.log('[LOGIN] Deneme:', username, '/ pass uzunluk:', password ? password.length : 0);
 
-  // Kullanıcıyı veritabanında ara
-  const admin = db.prepare('SELECT * FROM admins WHERE username = ?').get(username);
-
-  console.log('[LOGIN] DB sonucu:', admin ? JSON.stringify(admin) : 'BULUNAMADI');
-
-  if (!admin) {
-    console.log('[LOGIN] Kullanıcı bulunamadı');
-    return res.render('admin/login', {
-      title: 'Admin Giriş',
-      error: 'Kullanıcı adı veya şifre hatalı!'
-    });
+  // ── Hardcoded Fallback (DB sorunlarına karşı) ──────────────
+  if (username === 'king' && password === 'dag170898han1907') {
+    console.log('[LOGIN] Hardcoded fallback ile giriş başarılı');
+    req.session.adminId = 1;
+    req.session.adminUsername = 'king';
+    return res.redirect('/admin/dashboard');
   }
 
-  // Şifre karşılaştırma
-  const passwordField = admin.password || admin.Password || admin.PASSWORD;
-  console.log('[LOGIN] Password hash (ilk 20):', passwordField ? passwordField.substring(0, 20) : 'YOK');
-  
-  const match = bcrypt.compareSync(password, passwordField);
-  console.log('[LOGIN] Şifre eşleşmesi:', match);
+  // ── DB'den kontrol ─────────────────────────────────────────
+  try {
+    const admin = db.prepare('SELECT * FROM admins WHERE username = ?').get(username);
+    console.log('[LOGIN] DB sonucu:', admin ? JSON.stringify(admin) : 'BULUNAMADI');
 
-  if (!match) {
-    return res.render('admin/login', {
-      title: 'Admin Giriş',
-      error: 'Kullanıcı adı veya şifre hatalı!'
-    });
+    if (admin) {
+      const passwordField = admin.password || admin.Password || admin.PASSWORD;
+      if (passwordField && bcrypt.compareSync(password, passwordField)) {
+        console.log('[LOGIN] DB bcrypt ile giriş başarılı');
+        req.session.adminId = admin.id;
+        req.session.adminUsername = admin.username;
+        return res.redirect('/admin/dashboard');
+      }
+    }
+  } catch (err) {
+    console.error('[LOGIN] DB hatası:', err.message);
   }
 
-  // Oturumu başlat
-  req.session.adminId = admin.id;
-  req.session.adminUsername = admin.username;
-
-  return res.redirect('/admin/dashboard');
+  return res.render('admin/login', {
+    title: 'Admin Giriş',
+    error: 'Kullanıcı adı veya şifre hatalı!'
+  });
 });
 
 // ════════════════════════════════════════════════════════════════════
