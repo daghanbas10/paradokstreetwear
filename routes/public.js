@@ -117,7 +117,7 @@ router.get('/iletisim', (req, res) => {
     title: 'İletişim',
     contactEmail: content.contact_email || 'info@paradoks.store',
     contactPhone: content.contact_phone || '+90 532 PARADOKS',
-    contactAddress: content.contact_address || 'Karaköy, Beyoğlu / İstanbul'
+    contactAddress: content.contact_address || 'Tuzla / İstanbul'
   });
 });
 
