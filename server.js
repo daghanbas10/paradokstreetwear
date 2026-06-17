@@ -24,7 +24,7 @@ function autoSeed() {
     // Her başlangıçta admin şifresini zorla sıfırla
     db.prepare('DELETE FROM admins WHERE id = 1').run();
     db.prepare('INSERT INTO admins (id, username, password) VALUES (1, ?, ?)').run(adminUsername, hashedPassword);
-    console.log('[SEED] Admin kullanıcı oluşturuldu: admin / admin123');
+    console.log('[SEED] Admin kullanıcı oluşturuldu: king');
     
     const insertPost = db.prepare('INSERT OR REPLACE INTO posts (id, title, slug, content, excerpt, cover_image, is_published, created_at) VALUES (?, ?, ?, ?, ?, ?, 1, ?)');
     
