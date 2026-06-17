@@ -162,6 +162,14 @@ router.get('/admin/dashboard', (req, res) => {
   const totalMessages = db.prepare('SELECT COUNT(*) as count FROM messages').get().count;
   const unreadMessages = db.prepare('SELECT COUNT(*) as count FROM messages WHERE is_read = 0').get().count;
   const totalPosts = db.prepare('SELECT COUNT(*) as count FROM posts').get().count;
+  
+  // Üye istatistikleri
+  let totalMembers = 0;
+  let recentMembers = [];
+  try {
+    totalMembers = db.prepare('SELECT COUNT(*) as count FROM members').get().count;
+    recentMembers = db.prepare('SELECT * FROM members ORDER BY created_at DESC LIMIT 5').all();
+  } catch (e) { /* members tablosu henüz oluşmamış olabilir */ }
 
   // Son 5 mesajı al
   const recentMessages = db.prepare(`
@@ -175,7 +183,9 @@ router.get('/admin/dashboard', (req, res) => {
     totalMessages,
     unreadMessages,
     totalPosts,
+    totalMembers,
     recentMessages,
+    recentMembers,
     adminUsername: req.session.adminUsername
   });
 });
@@ -183,6 +193,58 @@ router.get('/admin/dashboard', (req, res) => {
 // /admin yolunu dashboard'a yönlendir
 router.get('/admin', (req, res) => {
   res.redirect('/admin/dashboard');
+});
+
+// ══════════════════════════════════════════════════════════════════
+// ÜYE YÖNETİMİ
+// ══════════════════════════════════════════════════════════════════
+
+// ── GET /admin/members - Üye listesi ─────────────────────────────
+router.get('/admin/members', (req, res) => {
+  let members = [];
+  let totalMembers = 0;
+  try {
+    members = db.prepare('SELECT * FROM members ORDER BY created_at DESC').all();
+    totalMembers = members.length;
+  } catch (e) { /* members tablosu henüz oluşmamış olabilir */ }
+
+  res.render('admin/members', {
+    title: 'Üyeler',
+    members,
+    totalMembers,
+    adminUsername: req.session.adminUsername
+  });
+});
+
+// ── DELETE /admin/members/:id - Üye sil ──────────────────────────
+router.delete('/admin/members/:id', (req, res) => {
+  try {
+    const result = db.prepare('DELETE FROM members WHERE id = ?').run(req.params.id);
+    if (result.changes === 0) {
+      return res.status(404).json({ success: false, message: 'Üye bulunamadı.' });
+    }
+    return res.json({ success: true, message: 'Üye başarıyla silindi.' });
+  } catch (error) {
+    console.error('Üye silme hatası:', error);
+    return res.status(500).json({ success: false, message: 'Bir hata oluştu.' });
+  }
+});
+
+// ── GET /admin/members/export - CSV Export ───────────────────────
+router.get('/admin/members/export', (req, res) => {
+  try {
+    const members = db.prepare('SELECT * FROM members ORDER BY created_at DESC').all();
+    let csv = 'ID,Ad Soyad,E-posta,Telefon,Kategori,Beden,Kayıt Tarihi\n';
+    members.forEach(m => {
+      csv += `${m.id},"${m.name || ''}","${m.email || ''}","${m.phone || ''}","${m.category || ''}","${m.size || ''}","${m.created_at || ''}"\n`;
+    });
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', 'attachment; filename=paradoks-uyeler.csv');
+    res.send('\uFEFF' + csv); // BOM for Excel UTF-8
+  } catch (error) {
+    console.error('CSV export hatası:', error);
+    res.status(500).send('Export hatası');
+  }
 });
 
 // ══════════════════════════════════════════════════════════════════

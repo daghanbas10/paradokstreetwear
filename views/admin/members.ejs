@@ -1,0 +1,115 @@
+<%- include('partials/admin-header') %>
+
+<!-- Üyeler Header -->
+<div class="admin-section-header" style="margin-bottom: 1.5rem;">
+    <div>
+        <h2 class="admin-section-title" style="margin-bottom: 4px;">Kayıtlı Üyeler</h2>
+        <p style="color: #A7A9BE; font-size: 0.85rem;">Toplam <strong style="color: #FFFFFE;"><%= totalMembers %></strong> üye</p>
+    </div>
+    <a href="/admin/members/export" class="admin-btn-export" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: rgba(163,177,138,0.15); color: #A3B18A; border: 1px solid rgba(163,177,138,0.3); border-radius: 10px; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: all 0.3s ease;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        CSV İndir
+    </a>
+</div>
+
+<!-- Üye Tablosu -->
+<div class="admin-table-wrapper glass-card-admin">
+    <% if (members && members.length > 0) { %>
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Ad Soyad</th>
+                    <th>E-posta</th>
+                    <th>Telefon</th>
+                    <th>Kategori</th>
+                    <th>Beden</th>
+                    <th>Kayıt Tarihi</th>
+                    <th>İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% members.forEach(function(m, index) { %>
+                    <tr id="member-row-<%= m.id %>">
+                        <td style="color: #6B7280; font-size: 0.8rem;"><%= index + 1 %></td>
+                        <td><span class="table-user-name"><%= m.name %></span></td>
+                        <td>
+                            <a href="mailto:<%= m.email %>" style="color: #6C63FF; text-decoration: none; font-size: 0.85rem;">
+                                <%= m.email %>
+                            </a>
+                        </td>
+                        <td style="color: #A7A9BE; font-size: 0.85rem;">
+                            <% if (m.phone) { %>
+                                <a href="tel:<%= m.phone %>" style="color: #A7A9BE; text-decoration: none;"><%= m.phone %></a>
+                            <% } else { %>
+                                —
+                            <% } %>
+                        </td>
+                        <td>
+                            <% if (m.category === 'erkek') { %>
+                                <span class="badge badge-info">👔 Erkek</span>
+                            <% } else if (m.category === 'kadin') { %>
+                                <span class="badge" style="background: rgba(255,101,132,0.15); color: #FF6584;">🌸 Kadın</span>
+                            <% } else if (m.category === 'hepsi') { %>
+                                <span class="badge badge-warning">🔥 Hepsi</span>
+                            <% } else { %>
+                                <span style="color: #6B7280;">—</span>
+                            <% } %>
+                        </td>
+                        <td style="font-weight: 600; color: #FFFFFE;"><%= m.size ? m.size.toUpperCase() : '—' %></td>
+                        <td>
+                            <span class="table-date">
+                                <%= m.created_at ? new Date(m.created_at).toLocaleDateString('tr-TR', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '' %>
+                            </span>
+                        </td>
+                        <td>
+                            <button onclick="deleteMember(<%= m.id %>)" class="admin-btn-delete" title="Üyeyi Sil" style="background: rgba(255,101,132,0.1); color: #FF6584; border: none; border-radius: 8px; padding: 6px 10px; cursor: pointer; transition: all 0.3s ease;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="3 6 5 6 21 6"/>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <div class="admin-empty-state">
+            <div class="admin-empty-icon">👥</div>
+            <p class="admin-empty-text">Henüz kayıtlı üye bulunmuyor.</p>
+            <p style="color: #6B7280; font-size: 0.8rem; margin-top: 8px;">Ziyaretçiler ana sayfadaki üyelik formunu doldurduğunda burada listelenir.</p>
+        </div>
+    <% } %>
+</div>
+
+<script>
+async function deleteMember(id) {
+    if (!confirm('Bu üyeyi silmek istediğinize emin misiniz?')) return;
+    
+    try {
+        const res = await fetch('/admin/members/' + id, { method: 'DELETE' });
+        const data = await res.json();
+        
+        if (data.success) {
+            const row = document.getElementById('member-row-' + id);
+            if (row) {
+                row.style.transition = 'all 0.3s ease';
+                row.style.opacity = '0';
+                row.style.transform = 'translateX(20px)';
+                setTimeout(() => row.remove(), 300);
+            }
+        } else {
+            alert(data.message || 'Silme işlemi başarısız.');
+        }
+    } catch (err) {
+        alert('Bir hata oluştu.');
+    }
+}
+</script>
+
+<%- include('partials/admin-footer') %>

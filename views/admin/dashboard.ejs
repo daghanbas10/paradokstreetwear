@@ -43,6 +43,22 @@
             <span class="stat-card-label">Blog Yazısı</span>
         </div>
     </div>
+
+    <!-- Üye Sayısı -->
+    <div class="stat-card-admin glass-card-admin">
+        <div class="stat-card-icon" style="background: rgba(163,177,138,0.15); color: #A3B18A;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+        </div>
+        <div class="stat-card-body">
+            <span class="stat-card-number"><%= typeof totalMembers !== 'undefined' ? totalMembers : 0 %></span>
+            <span class="stat-card-label">Kayıtlı Üye</span>
+        </div>
+    </div>
 </div>
 
 <!-- Son Mesajlar Tablosu -->
@@ -98,6 +114,55 @@
             <div class="admin-empty-state">
                 <div class="admin-empty-icon">📭</div>
                 <p class="admin-empty-text">Henüz mesaj bulunmuyor.</p>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<!-- Son Üyeler Tablosu -->
+<div class="admin-section">
+    <div class="admin-section-header">
+        <h2 class="admin-section-title">Son Kayıt Olan Üyeler</h2>
+        <a href="/admin/members" class="admin-section-link">
+            Tüm Üyeleri Gör
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+            </svg>
+        </a>
+    </div>
+    <div class="admin-table-wrapper glass-card-admin">
+        <% if (typeof recentMembers !== 'undefined' && recentMembers && recentMembers.length > 0) { %>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Ad Soyad</th>
+                        <th>E-posta</th>
+                        <th>Kategori</th>
+                        <th>Beden</th>
+                        <th>Kayıt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% recentMembers.forEach(function(m) { %>
+                        <tr>
+                            <td><span class="table-user-name"><%= m.name %></span></td>
+                            <td><span class="table-user-email"><%= m.email %></span></td>
+                            <td><span class="badge badge-info"><%= m.category === 'erkek' ? '👔 Erkek' : m.category === 'kadin' ? '🌸 Kadın' : m.category === 'hepsi' ? '🔥 Hepsi' : '—' %></span></td>
+                            <td><%= m.size ? m.size.toUpperCase() : '—' %></td>
+                            <td>
+                                <span class="table-date">
+                                    <%= m.created_at ? new Date(m.created_at).toLocaleDateString('tr-TR', { year: 'numeric', month: 'short', day: 'numeric' }) : '' %>
+                                </span>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <div class="admin-empty-state">
+                <div class="admin-empty-icon">👥</div>
+                <p class="admin-empty-text">Henüz kayıtlı üye bulunmuyor.</p>
             </div>
         <% } %>
     </div>
