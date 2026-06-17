@@ -32,108 +32,86 @@ async function seed() {
   const samplePosts = [
     {
       id: 1,
-      title: 'Oversize Tişört Nasıl Kombinlenir? 7 Sokak Stili İlhamı',
-      slug: 'oversize-tisort-nasil-kombinlenir',
-      cover_image: '/uploads/blog-tshirt.png',
-      content: `<h2>Oversize Tişört: Sokağın Vazgeçilmezi</h2>
-<p>Oversize tişört, streetwear kültürünün temel taşıdır. Ama doğru kombinlenmezse "evde oturuyorum" havasına bürünür. İşte profesyonel gibi oversize giymek için 7 altın kural:</p>
+      title: 'Yazlık Kombin Rehberi: Oversize Tişört + Şort Formülleri',
+      slug: 'yazlik-kombin-rehberi',
+      cover_image: '/uploads/blog-combo.png',
+      content: `<h2>Yaz Kombini = Oversize + Şort</h2>
+<p>Sıcak havalarda hem rahat hem şık olmanın formülü basit: doğru oversize tişört + doğru şort.</p>
 
-<h2>1. Altına Slim Fit veya Tapered Pantolon</h2>
-<p>Üst geniş, alt dar — bu kontrast vücudunu dengeler. Siyah skinny jean veya tapered jogger ideal eşlikçilerdir.</p>
+<h2>1. Siyah Oversize + Cargo Şort</h2>
+<p>Klasik siyah oversize tişört, haki cargo şortla buluşunca sokak stilinin kralı olursun. Chunky sneaker ekle.</p>
 
-<h2>2. Katmanlama Sanatı</h2>
-<p>Oversize tişörtün altına uzun kollu beyaz tişört giy. Kol uçları ve etek kısmı görünsün. Bu "layering" tekniği anında seviye atlatır.</p>
+<h2>2. Beyaz Basic + Mesh Şort</h2>
+<p>Minimal beyaz tişört ve siyah mesh şort — basketbol sahalarından sokaklara taşan en temiz kombin.</p>
 
-<h2>3. Aksesuar ile Fark Yarat</h2>
-<p>Zincir kolye, bucket hat veya crossbody çanta ekle. Minimalizmi aksesuarla kır.</p>
+<h2>3. Crop Top + High-Waist Şort</h2>
+<p>Kadınlar için: adaçayı yeşili crop top ve bej yüksek bel şort. Bucket hat ile tamamla.</p>
 
-<h2>4. Sneaker Seçimi Kritik</h2>
-<p>Chunky sneaker veya Air Force 1 gibi klasikler oversize ile mükemmel uyum sağlar. Dar ayakkabılardan kaçın.</p>
+<h2>4. Yazlık Set Kombini</h2>
+<p>Aynı renk şort ve tişört seti — kombin düşünmeden anında hazırsın.</p>
 
-<h2>5. Renk Paleti Oluştur</h2>
-<p>Monokrom (tek renk tonları) veya complementary (zıt renkler) paletlerle kombin kur. Rastgele renk seçme.</p>
+<h2>5. Polo + Bermuda</h2>
+<p>Smart-casual istiyorsan: lacivert polo yaka tişört ve bej bermuda şort. Beyaz sneaker ile bitir.</p>
 
-<h2>6. Front Tuck Tekniği</h2>
-<p>Tişörtün ön kısmını bele hafifçe sok, arkasını serbest bırak. Orantıyı kurtarır ve beli tanımlar.</p>
-
-<h2>7. Güven En İyi Aksesuar</h2>
-<p>Ne giyersen giy, eğer rahat hissediyorsan doğru yoldasın. Sokak stili kuralları yıkmakla ilgilidir.</p>
-
-<blockquote>PARADOKS oversize tişörtleri 300gsm heavy-weight penye pamuktan üretilir. Pre-shrunk teknolojisiyle yıkamada küçülme yapmaz.</blockquote>`,
-      excerpt: 'Oversize tişörtü sokak stilinde profesyonel gibi kombinlemenin 7 altın kuralı. Layering tekniklerinden aksesuar seçimine kadar her şey.',
-      created_at: '2026-06-01 10:00:00'
+<blockquote>PARADOKS yaz koleksiyonu quick-dry kumaşlarla İstanbul yazına özel tasarlandı.</blockquote>`,
+      excerpt: 'Bu yaz oversize tişört ve şortla nasıl profesyonel kombin kurarsın? 5 altın formül burada.',
+      created_at: '2026-06-08 10:00:00'
     },
     {
       id: 2,
-      title: 'Hoodie Kültürü: Kapüşonlunun Sokaktan Podyuma Yolculuğu',
-      slug: 'hoodie-kulturu-kapusonlunun-yolculugu',
-      cover_image: '/uploads/blog-hoodie.png',
-      content: `<h2>Bir Kapüşonun Hikâyesi</h2>
-<p>1930'larda New York'taki depo işçileri için üretilen hoodie, bugün milyar dolarlık moda endüstrisinin en ikonik parçası. Peki bu dönüşüm nasıl oldu?</p>
+      title: 'Sokak Kültürü ve Yaz: Skate Parklarından Sahil Kenarlarına',
+      slug: 'sokak-kulturu-ve-yaz',
+      cover_image: '/uploads/blog-culture.png',
+      content: `<h2>Yaz Gelince Sokak Değişir</h2>
+<p>Kışın hoodie ve jogger ile dolan sokaklar, yazın mesh şortlar, crop toplar ve bucket hatlerle bambaşka bir enerjiye bürünür.</p>
 
-<h2>Hip-Hop ve Hoodie</h2>
-<p>80'lerde Run-DMC ve LL Cool J gibi hip-hop sanatçıları hoodie'yi sahneye taşıdı. Artık hoodie sadece bir kıyafet değil, bir tutumdu — sisteme karşı duruşun sembolü.</p>
+<h2>Skate Parkları: Yazın Kalbi</h2>
+<p>Yazın skate parkları sadece kaykay mekanı değil, stil podyumu. Oversize tişört, vans ve grafik baskılı şortlar buranın üniforması.</p>
 
-<h2>Skate Kültürü Etkisi</h2>
-<p>90'larda Thrasher ve Supreme gibi markalar hoodie'yi skate kültürüyle birleştirdi. Kapüşonlu, grafiti desenli, yırtık — ne kadar "kirli" o kadar cool.</p>
+<h2>Sahil Stili x Sokak Stili</h2>
+<p>İstanbul gibi sahil şehirlerinde streetwear ve plaj kültürü iç içe geçer.</p>
 
-<h2>Lüks Markalar Sahneye Çıkıyor</h2>
-<p>2010'lardan itibaren Balenciaga, Vetements ve Off-White hoodie'yi lüks moda dünyasına taşıdı. 500$'lık hoodie'ler normalleşti.</p>
+<h2>Festivaller ve Açık Hava</h2>
+<p>Yaz festivalleri streetwear için en büyük sahne. Tie-dye tişörtler, neon aksanlar ve limitli parçalar burada parlar.</p>
 
-<h2>PARADOKS Hoodie Farkı</h2>
-<p>Biz PARADOKS olarak hoodie'ye hak ettiği saygıyı veriyoruz:</p>
-<ul>
-  <li><strong>400gsm French Terry:</strong> Dört mevsim konfor</li>
-  <li><strong>YKK Fermuar:</strong> Binlerce açılış-kapanışa dayanır</li>
-  <li><strong>Çift Katmanlı Kapüşon:</strong> Form kaybetmez</li>
-  <li><strong>Kanguru Cep:</strong> Telefon ve eller için mükemmel</li>
-</ul>
+<h2>PARADOKS Yaz Felsefesi</h2>
+<p>Biz yazı sadece bir mevsim değil, bir tutum olarak görüyoruz. Hafif kumaşlar, cesur kesimler, minimal logolar.</p>
 
-<blockquote>"Hoodie sadece bir kıyafet değil, bir zırhtır." — Anonim Sokak Filozofu</blockquote>`,
-      excerpt: 'Hoodie nasıl depo işçilerinin kıyafetinden milyar dolarlık moda ikonuna dönüştü? Hip-hop, skate ve lüks modanın kesiştiği hikâye.',
-      created_at: '2026-06-05 14:30:00'
+<blockquote>"Sokak stili mevsim tanımaz, sadece form değiştirir." — PARADOKS</blockquote>`,
+      excerpt: 'Sokak kültürü yazın nasıl değişir? Skate parklarından sahil kenarlarına uzanan stil yolculuğu.',
+      created_at: '2026-06-12 14:30:00'
     },
     {
       id: 3,
-      title: '2026 Yaz Trendleri: Bu Yaz Ne Giyiyoruz?',
-      slug: '2026-yaz-trendleri',
-      cover_image: '/uploads/blog-shorts.png',
-      content: `<h2>Yaz 2026: Sokak Stilinde Sıcak Trendler</h2>
-<p>Bu yaz sokak modası daha cesur, daha renkli ve daha rahat. İşte kaçırmamanız gereken 5 trend:</p>
+      title: 'Yaz 2026 Trend Raporu: Bu Sezon Ne Giyiyoruz?',
+      slug: 'yaz-2026-trend-raporu',
+      cover_image: '/uploads/blog-trends.png',
+      content: `<h2>2026 Yazında 5 Büyük Trend</h2>
+<p>Bu yaz sokak modası daha cesur, daha ferah ve daha renkli.</p>
 
-<h2>1. Mesh Şortlar Geri Döndü</h2>
-<p>Basketbol sahalarından sokaklara taşan mesh şortlar bu yazın yıldızı. Oversized tişört + mesh şort + chunky sneaker = yaz formülü.</p>
+<h2>1. Crop Top Patlaması</h2>
+<p>Sadece kadınlar için değil, erkekler de crop top denemeye başladı. Adaçayı yeşili ve kemik beyazı en popüler tonlar.</p>
 
-<h2>2. Washed-Out Renkler</h2>
-<p>Solmuş efektli pastel tonlar her yerde. Özellikle lavanta, mint yeşili ve soluk turuncu öne çıkıyor.</p>
+<h2>2. Mesh ve Quick-Dry Kumaşlar</h2>
+<p>Teknolojik kumaşlar artık sadece spor için değil. Mesh şortlar günlük sokak stilinin parçası.</p>
 
-<h2>3. Cargo Her Şey</h2>
-<p>Cargo şort, cargo pantolon, hatta cargo yelek. Cep detayları bu yazın olmazsa olmazı. Fonksiyonel ve şık.</p>
+<h2>3. Washed-Out ve Soluk Tonlar</h2>
+<p>Parlak renkler yerini solmuş efektli pastel tonlara bırakıyor.</p>
 
-<h2>4. Retro Spor Referansları</h2>
-<p>90'ların spor estetiği geri geldi. Çizgili şortlar, polo yaka tişörtler ve terry cloth kumaşlar trend.</p>
+<h2>4. Fonksiyonel Cepler</h2>
+<p>Cargo şortlar ve çok cepli yelekler bu yazın olmazsa olmazı.</p>
 
-<h2>5. Minimal Logolar</h2>
-<p>Büyük logolar yerini küçük, rafine işlemelere bırakıyor. Az ama öz — kaliteyi logonun büyüklüğü değil, kumaşın dokusu anlatıyor.</p>
+<h2>5. Minimal Logoculuk</h2>
+<p>Dev logolar gitti, küçük işlemeli detaylar geldi.</p>
 
-<h3>PARADOKS Yaz Koleksiyonu</h3>
-<p>Quick-dry kumaş, elastik bel ve fonksiyonel cepler ile İstanbul yazına özel tasarlandı. Terlemeden, stilinden ödün vermeden yaz geçir.</p>`,
-      excerpt: '2026 yazının en sıcak sokak stili trendleri: mesh şortlar, cargo detaylar, washed-out renkler ve retro spor referansları.',
-      created_at: '2026-06-10 09:15:00'
+<h3>PARADOKS'un Yaz Seçkisi</h3>
+<p>9 kategoride yazlık koleksiyon: oversize tişört, crop top, mesh şort, cargo şort, polo yaka, yazlık set, basic, aksesuar ve limited summer drop.</p>`,
+      excerpt: 'Mesh şortlar, crop toplar, cargo detaylar ve washed tonlar — 2026 yazının en sıcak trendleri.',
+      created_at: '2026-06-15 09:15:00'
     }
   ];
 
-  // Blog yazılarını ekle
-  const insertPosts = db.transaction((posts) => {
-    for (const post of posts) {
-      insertPost.run(post.id, post.title, post.slug, post.content, post.excerpt, post.cover_image, post.created_at);
-    }
-  });
-
-  insertPosts(samplePosts);
-  console.log(`✓ ${samplePosts.length} blog yazısı güncellendi`);
-
-  // ── Örnek mesajlar ─────────────────────────────────────────────────
+// ── Örnek mesajlar ─────────────────────────────────────────────────
 
   const insertMessage = db.prepare(
     'INSERT OR IGNORE INTO messages (name, email, phone, subject, message, created_at) VALUES (?, ?, ?, ?, ?, ?)'
