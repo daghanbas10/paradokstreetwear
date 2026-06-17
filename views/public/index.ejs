@@ -253,11 +253,19 @@
             <span class="section-tag">📬 NEWSLETTER</span>
             <h2 style="font-family: 'Outfit', sans-serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: #1A1A1A; margin: 16px 0 12px;">Drop'ları Kaçırma</h2>
             <p style="color: #6B6B6B; font-size: 1rem; line-height: 1.8; margin-bottom: 28px;">Yeni koleksiyonlar, limited drop'lar ve özel indirimlerden ilk sen haberdar ol. Spam yok, sadece stil.</p>
-            <form id="newsletter-form" style="display: flex; gap: 12px; max-width: 480px; margin: 0 auto; flex-wrap: wrap; justify-content: center;" onsubmit="event.preventDefault(); this.querySelector('button').textContent='✓ Kayıt Olundu!'; this.querySelector('button').style.background='#A3B18A'; this.querySelector('input').value='';">
+            <form id="newsletter-form" style="display: flex; gap: 12px; max-width: 480px; margin: 0 auto; flex-wrap: wrap; justify-content: center;" onsubmit="event.preventDefault(); if(!this.querySelector('#kvkk').checked){this.querySelector('.kvkk-warn').style.display='block';return;} this.querySelector('.kvkk-warn').style.display='none'; this.querySelector('button').textContent='✓ Kayıt Olundu!'; this.querySelector('button').style.background='#A3B18A'; this.querySelector('input[type=email]').value='';">
                 <input type="email" placeholder="E-posta adresin" required style="flex: 1; min-width: 240px; padding: 14px 20px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1); background: #FFFFFE; color: #1A1A1A; font-family: 'Inter', sans-serif; font-size: 0.95rem; outline: none; transition: border-color 0.3s;">
                 <button type="submit" class="btn btn-primary" style="padding: 14px 28px; white-space: nowrap;">Abone Ol 🔔</button>
             </form>
-            <p style="color: rgba(0,0,0,0.3); font-size: 0.75rem; margin-top: 16px;">Dilediğin zaman çıkabilirsin. Gizliliğine saygı duyuyoruz.</p>
+            <!-- KVKK Onay -->
+            <label for="kvkk" style="display: flex; align-items: flex-start; gap: 10px; max-width: 480px; margin: 20px auto 0; cursor: pointer; text-align: left;">
+                <input type="checkbox" id="kvkk" style="margin-top: 3px; width: 18px; height: 18px; accent-color: #1A1A1A; flex-shrink: 0; cursor: pointer;">
+                <span style="color: #6B6B6B; font-size: 0.72rem; line-height: 1.6;">
+                    <strong style="color: #1A1A1A;">KVKK Aydınlatma Metni</strong>'ni okudum, anladım. Kişisel verilerimin PARADOKS tarafından yalnızca kampanya, yeni koleksiyon ve bilgilendirme amaçlı e-posta gönderimi için 6698 sayılı KVKK kapsamında işlenmesine onay veriyorum.
+                </span>
+            </label>
+            <p class="kvkk-warn" style="display:none; color:#c0392b; font-size:0.75rem; margin-top:8px;">⚠ Devam etmek için KVKK onayını vermeniz gerekmektedir.</p>
+            <p style="color: rgba(0,0,0,0.25); font-size: 0.7rem; margin-top: 12px;">Dilediğin zaman çıkabilirsin. Gizliliğine saygı duyuyoruz.</p>
         </div>
     </div>
 </section>
