@@ -91,11 +91,29 @@ router.get('/admin/login', (req, res) => {
 router.post('/admin/login', (req, res) => {
   const { username, password } = req.body;
 
+  console.log('[LOGIN] Deneme:', username);
+
   // Kullanıcıyı veritabanında ara
   const admin = db.prepare('SELECT * FROM admins WHERE username = ?').get(username);
 
-  // Kullanıcı bulunamadı veya şifre yanlış
-  if (!admin || !bcrypt.compareSync(password, admin.password)) {
+  console.log('[LOGIN] DB sonucu:', admin ? JSON.stringify(admin) : 'BULUNAMADI');
+
+  if (!admin) {
+    console.log('[LOGIN] Kullanıcı bulunamadı');
+    return res.render('admin/login', {
+      title: 'Admin Giriş',
+      error: 'Kullanıcı adı veya şifre hatalı!'
+    });
+  }
+
+  // Şifre karşılaştırma
+  const passwordField = admin.password || admin.Password || admin.PASSWORD;
+  console.log('[LOGIN] Password hash (ilk 20):', passwordField ? passwordField.substring(0, 20) : 'YOK');
+  
+  const match = bcrypt.compareSync(password, passwordField);
+  console.log('[LOGIN] Şifre eşleşmesi:', match);
+
+  if (!match) {
     return res.render('admin/login', {
       title: 'Admin Giriş',
       error: 'Kullanıcı adı veya şifre hatalı!'
