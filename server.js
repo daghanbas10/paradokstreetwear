@@ -12,6 +12,33 @@ const hpp = require('hpp');
 const path = require('path');
 const fs = require('fs');
 const db = require('./database/db');
+const bcrypt = require('bcryptjs');
+
+// ── Otomatik Seed (her başlangıçta veritabanını güncelle) ────────
+function autoSeed() {
+  try {
+    const adminUsername = process.env.ADMIN_USERNAME || 'admin';
+    const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+    const hashedPassword = bcrypt.hashSync(adminPassword, 10);
+    
+    db.prepare('INSERT OR REPLACE INTO admins (id, username, password) VALUES (1, ?, ?)').run(adminUsername, hashedPassword);
+    
+    const insertPost = db.prepare('INSERT OR REPLACE INTO posts (id, title, slug, content, excerpt, cover_image, is_published, created_at) VALUES (?, ?, ?, ?, ?, ?, 1, ?)');
+    
+    const posts = [
+      { id: 1, title: 'Oversize Tişört Nasıl Kombinlenir? 7 Sokak Stili İlhamı', slug: 'oversize-tisort-nasil-kombinlenir', cover_image: '/uploads/blog-tshirt.png', excerpt: 'Oversize tişörtü sokak stilinde profesyonel gibi kombinlemenin 7 altın kuralı.', content: '<h2>Oversize Tişört: Sokağın Vazgeçilmezi</h2><p>Oversize tişört, streetwear kültürünün temel taşıdır. İşte profesyonel gibi oversize giymek için 7 altın kural:</p><h2>1. Altına Slim Fit veya Tapered Pantolon</h2><p>Üst geniş, alt dar — bu kontrast vücudunu dengeler.</p><h2>2. Katmanlama Sanatı</h2><p>Oversize tişörtün altına uzun kollu beyaz tişört giy. Bu layering tekniği anında seviye atlatır.</p><h2>3. Aksesuar ile Fark Yarat</h2><p>Zincir kolye, bucket hat veya crossbody çanta ekle.</p><h2>4. Sneaker Seçimi Kritik</h2><p>Chunky sneaker veya Air Force 1 gibi klasikler oversize ile mükemmel uyum sağlar.</p><h2>5. Renk Paleti Oluştur</h2><p>Monokrom veya complementary paletlerle kombin kur.</p><h2>6. Front Tuck Tekniği</h2><p>Tişörtün ön kısmını bele hafifçe sok, arkasını serbest bırak.</p><h2>7. Güven En İyi Aksesuar</h2><p>Ne giyersen giy, eğer rahat hissediyorsan doğru yoldasın.</p><blockquote>PARADOKS oversize tişörtleri 300gsm heavy-weight penye pamuktan üretilir.</blockquote>', created_at: '2026-06-01 10:00:00' },
+      { id: 2, title: 'Hoodie Kültürü: Kapüşonlunun Sokaktan Podyuma Yolculuğu', slug: 'hoodie-kulturu-kapusonlunun-yolculugu', cover_image: '/uploads/blog-hoodie.png', excerpt: 'Hoodie nasıl depo işçilerinin kıyafetinden milyar dolarlık moda ikonuna dönüştü?', content: '<h2>Bir Kapüşonun Hikâyesi</h2><p>1930\'larda New York\'taki depo işçileri için üretilen hoodie, bugün milyar dolarlık moda endüstrisinin en ikonik parçası.</p><h2>Hip-Hop ve Hoodie</h2><p>80\'lerde Run-DMC ve LL Cool J gibi hip-hop sanatçıları hoodie\'yi sahneye taşıdı. Artık hoodie sadece bir kıyafet değil, bir tutumdu.</p><h2>Skate Kültürü Etkisi</h2><p>90\'larda Thrasher ve Supreme gibi markalar hoodie\'yi skate kültürüyle birleştirdi.</p><h2>Lüks Markalar Sahneye Çıkıyor</h2><p>2010\'lardan itibaren Balenciaga, Vetements ve Off-White hoodie\'yi lüks moda dünyasına taşıdı.</p><h2>PARADOKS Hoodie Farkı</h2><ul><li><strong>400gsm French Terry:</strong> Dört mevsim konfor</li><li><strong>YKK Fermuar:</strong> Binlerce açılış-kapanışa dayanır</li><li><strong>Çift Katmanlı Kapüşon:</strong> Form kaybetmez</li></ul><blockquote>"Hoodie sadece bir kıyafet değil, bir zırhtır."</blockquote>', created_at: '2026-06-05 14:30:00' },
+      { id: 3, title: '2026 Yaz Trendleri: Bu Yaz Ne Giyiyoruz?', slug: '2026-yaz-trendleri', cover_image: '/uploads/blog-shorts.png', excerpt: '2026 yazının en sıcak sokak stili trendleri: mesh şortlar, cargo detaylar ve retro spor referansları.', content: '<h2>Yaz 2026: Sokak Stilinde Sıcak Trendler</h2><p>Bu yaz sokak modası daha cesur, daha renkli ve daha rahat.</p><h2>1. Mesh Şortlar Geri Döndü</h2><p>Basketbol sahalarından sokaklara taşan mesh şortlar bu yazın yıldızı.</p><h2>2. Washed-Out Renkler</h2><p>Solmuş efektli pastel tonlar her yerde. Lavanta, mint yeşili ve soluk turuncu öne çıkıyor.</p><h2>3. Cargo Her Şey</h2><p>Cargo şort, cargo pantolon, hatta cargo yelek. Cep detayları bu yazın olmazsa olmazı.</p><h2>4. Retro Spor Referansları</h2><p>90\'ların spor estetiği geri geldi. Çizgili şortlar ve terry cloth kumaşlar trend.</p><h2>5. Minimal Logolar</h2><p>Büyük logolar yerini küçük, rafine işlemelere bırakıyor.</p><h3>PARADOKS Yaz Koleksiyonu</h3><p>Quick-dry kumaş, elastik bel ve fonksiyonel cepler ile İstanbul yazına özel tasarlandı.</p>', created_at: '2026-06-10 09:15:00' }
+    ];
+    
+    for (const p of posts) {
+      insertPost.run(p.id, p.title, p.slug, p.content, p.excerpt, p.cover_image, p.created_at);
+    }
+    console.log('✓ Veritabanı seed güncellendi (admin + 3 blog)');
+  } catch (e) {
+    console.log('Seed zaten mevcut veya hata:', e.message);
+  }
+}
 
 // Express uygulamasını oluştur
 const app = express();
@@ -135,6 +162,7 @@ app.set('views', path.join(__dirname, 'views'));
   try {
     // Veritabanını başlat (sql.js WASM yüklemesi async)
     await db.init();
+    autoSeed();
 
     // ── Rotaları import et ve bağla ────────────────────────────────
     const publicRoutes = require('./routes/public');
