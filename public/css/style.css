@@ -4683,5 +4683,145 @@ body.no-scroll {
 }
 
 /* ============================================================
+   MOBILE SWIPE / SCROLL-SNAP OPTIMIZATION
+   ============================================================ */
+
+/* — Mobil Yatay Kaydırma (768px altı) — */
+@media (max-width: 768px) {
+    /* Ana sayfa kategori kartları — yatay swipe */
+    .services-grid {
+        display: flex !important;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+        gap: 16px;
+        padding-bottom: 16px;
+        touch-action: pan-x;
+    }
+
+    .services-grid > .service-card {
+        flex: 0 0 85vw;
+        max-width: 85vw;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+    }
+
+    /* Koleksiyon sayfası ürün kartları — yatay swipe */
+    .services-detail-grid {
+        display: flex !important;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+        gap: 16px;
+        padding-bottom: 20px;
+        touch-action: pan-x;
+    }
+
+    .services-detail-grid > .service-detail-card {
+        flex: 0 0 88vw;
+        max-width: 88vw;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+        margin-bottom: 0;
+    }
+
+    /* Scrollbar gizle ama kaydırma aktif */
+    .services-grid::-webkit-scrollbar,
+    .services-detail-grid::-webkit-scrollbar {
+        height: 0;
+        display: none;
+    }
+    .services-grid,
+    .services-detail-grid {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    /* Blog kartları — yatay swipe */
+    .blog-grid {
+        display: flex !important;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+        gap: 16px;
+        padding-bottom: 16px;
+        touch-action: pan-x;
+    }
+
+    .blog-grid > .blog-card {
+        flex: 0 0 85vw;
+        max-width: 85vw;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+    }
+
+    .blog-grid::-webkit-scrollbar {
+        height: 0;
+        display: none;
+    }
+    .blog-grid {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+}
+
+/* — Swipe İndikatör — */
+.swipe-hint {
+    display: none;
+    text-align: center;
+    padding: 8px 0 0;
+    color: var(--color-muted);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.swipe-hint::before {
+    content: '← kaydır →';
+}
+
+@media (max-width: 768px) {
+    .swipe-hint {
+        display: block;
+        animation: fadeInUp 0.6s ease-out;
+    }
+}
+
+/* — Touch Feedback — */
+@media (hover: none) and (pointer: coarse) {
+    .service-card:active,
+    .service-detail-card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+
+    .btn:active {
+        transform: scale(0.96) !important;
+        transition: transform 0.1s ease !important;
+    }
+
+    /* Daha büyük touch target'lar */
+    .btn {
+        min-height: 48px !important;
+    }
+
+    .service-card-link,
+    .blog-card-link {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    /* Kategori tab'ları mobilde daha büyük */
+    .cat-tab {
+        min-height: 44px;
+        padding: 12px 24px !important;
+    }
+}
+
+/* ============================================================
    END OF STYLE.CSS
    ============================================================ */
