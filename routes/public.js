@@ -39,7 +39,7 @@ router.get('/', (req, res) => {
   `).all();
 
   res.render('public/index', {
-    title: 'PARADOKS — Kuralları Sen Yaz',
+    title: 'PARADOKS Streetwear | Oversize Tişört & Sokak Modası - Yaz 2026',
     heroTitle: content.hero_title || 'Kuralları Sen Yaz',
     heroSubtitle: content.hero_subtitle || 'Sıradan olmayı reddedenler için tasarlandı.',
     aboutText: content.about_text || '',
@@ -59,7 +59,7 @@ router.get('/hizmetler', (req, res) => {
   ]);
 
   res.render('public/services', {
-    title: 'Koleksiyon',
+    title: 'Yaz Koleksiyonu 2026 | PARADOKS Streetwear',
     content
   });
 });
@@ -76,7 +76,7 @@ router.get('/blog', (req, res) => {
   `).all();
 
   res.render('public/blog', {
-    title: 'Blog — Moda & Stil',
+    title: 'Sokak Stili Blog | PARADOKS Streetwear',
     posts
   });
 });
@@ -114,7 +114,7 @@ router.get('/iletisim', (req, res) => {
   ]);
 
   res.render('public/contact', {
-    title: 'İletişim',
+    title: 'İletişim | PARADOKS Streetwear - Tuzla/İstanbul',
     contactEmail: content.contact_email || 'info@paradoks.store',
     contactPhone: content.contact_phone || '+90 532 PARADOKS',
     contactAddress: content.contact_address || 'Tuzla / İstanbul'

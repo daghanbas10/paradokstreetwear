@@ -1,8 +1,8 @@
 /* ============================================================
-   STYLE.CSS — Dark Glassmorphism Service Website
+   STYLE.CSS — Light Summer Theme Service Website
    Author: AI CSS Expert
-   Version: 2.0
-   Last Updated: 2026-06-12
+   Version: 3.0
+   Last Updated: 2026-06-17
    ============================================================ */
 
 /* ============================================================
@@ -15,30 +15,30 @@
    ============================================================ */
 :root {
     /* — Primary Palette — */
-    --color-primary: #8B5CF6;
-    --color-primary-rgb: 139, 92, 246;
-    --color-secondary: #A78BFA;
-    --color-secondary-rgb: 167, 139, 250;
-    --color-accent: #C4B5FD;
-    --color-accent-rgb: 196, 181, 253;
+    --color-primary: #1A1A1A;
+    --color-primary-rgb: 26, 26, 26;
+    --color-secondary: #D4A373;
+    --color-secondary-rgb: 212, 163, 115;
+    --color-accent: #A3B18A;
+    --color-accent-rgb: 163, 177, 138;
 
     /* — Background & Surface — */
-    --color-bg: #070B1A;
-    --color-bg-rgb: 7, 11, 26;
-    --color-surface: #0E1230;
-    --color-surface-rgb: 14, 18, 48;
-    --color-card: rgba(139, 92, 246, 0.04);
-    --color-footer-bg: #050815;
+    --color-bg: #F5F2ED;
+    --color-bg-rgb: 245, 242, 237;
+    --color-surface: #FFFFFE;
+    --color-surface-rgb: 255, 255, 254;
+    --color-card: rgba(0, 0, 0, 0.02);
+    --color-footer-bg: #EDEAE5;
 
     /* — Text — */
-    --color-text: #FFFFFE;
-    --color-text-rgb: 255, 255, 254;
-    --color-muted: #9294B8;
-    --color-muted-rgb: 146, 148, 184;
+    --color-text: #1A1A1A;
+    --color-text-rgb: 26, 26, 26;
+    --color-muted: #6B6B6B;
+    --color-muted-rgb: 107, 107, 107;
 
     /* — Border — */
-    --color-border: rgba(139, 92, 246, 0.08);
-    --color-border-hover: rgba(139, 92, 246, 0.25);
+    --color-border: rgba(0, 0, 0, 0.08);
+    --color-border-hover: rgba(0, 0, 0, 0.18);
 
     /* — Status Colors — */
     --color-success: #00E676;
@@ -93,14 +93,14 @@
     --radius-circle: 50%;
 
     /* — Shadows — */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
-    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.2);
-    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.25);
-    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.3);
-    --shadow-primary: 0 4px 25px rgba(108, 99, 255, 0.35);
-    --shadow-primary-hover: 0 12px 35px rgba(108, 99, 255, 0.45);
-    --shadow-glow: 0 0 20px rgba(108, 99, 255, 0.2);
-    --shadow-glow-strong: 0 0 40px rgba(108, 99, 255, 0.4);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.12);
+    --shadow-primary: 0 4px 25px rgba(26, 26, 26, 0.15);
+    --shadow-primary-hover: 0 12px 35px rgba(26, 26, 26, 0.2);
+    --shadow-glow: 0 0 20px rgba(26, 26, 26, 0.06);
+    --shadow-glow-strong: 0 0 40px rgba(26, 26, 26, 0.1);
 
     /* — Transitions — */
     --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
@@ -126,12 +126,12 @@
     --container-padding: 24px;
 
     /* — Gradients — */
-    --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-    --gradient-primary-accent: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    --gradient-text: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    --gradient-hero: linear-gradient(135deg, var(--color-text) 0%, var(--color-primary) 50%, var(--color-accent) 100%);
-    --gradient-shimmer: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.08) 50%, transparent 100%);
-    --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+    --gradient-primary: linear-gradient(135deg, var(--color-primary), #333333);
+    --gradient-primary-accent: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
+    --gradient-text: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
+    --gradient-hero: linear-gradient(135deg, var(--color-text) 0%, var(--color-secondary) 50%, var(--color-accent) 100%);
+    --gradient-shimmer: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.03) 50%, transparent 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
 }
 
 /* ============================================================
@@ -166,13 +166,13 @@ body {
 }
 
 ::selection {
-    background: rgba(108, 99, 255, 0.3);
-    color: #fff;
+    background: rgba(212, 163, 115, 0.25);
+    color: #1A1A1A;
 }
 
 ::-moz-selection {
-    background: rgba(108, 99, 255, 0.3);
-    color: #fff;
+    background: rgba(212, 163, 115, 0.25);
+    color: #1A1A1A;
 }
 
 /* — Headings — */
@@ -268,23 +268,23 @@ textarea {
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(10, 10, 18, 0.8);
+    background: rgba(245, 242, 237, 0.9);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--color-primary);
+    background: var(--color-secondary);
     border-radius: var(--radius-full);
     transition: background var(--transition-base);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #8078FF;
+    background: #C4956A;
 }
 
 /* Firefox scrollbar */
 * {
     scrollbar-width: thin;
-    scrollbar-color: var(--color-primary) rgba(10, 10, 18, 0.8);
+    scrollbar-color: var(--color-secondary) rgba(245, 242, 237, 0.9);
 }
 
 /* ============================================================
@@ -317,10 +317,10 @@ textarea {
 @keyframes pulseGlow {
     0%,
     100% {
-        box-shadow: 0 0 20px rgba(108, 99, 255, 0.2);
+        box-shadow: 0 0 20px rgba(212, 163, 115, 0.1);
     }
     50% {
-        box-shadow: 0 0 40px rgba(108, 99, 255, 0.4);
+        box-shadow: 0 0 40px rgba(212, 163, 115, 0.2);
     }
 }
 
@@ -409,10 +409,10 @@ textarea {
 @keyframes borderGlow {
     0%,
     100% {
-        border-color: rgba(108, 99, 255, 0.2);
+        border-color: rgba(212, 163, 115, 0.15);
     }
     50% {
-        border-color: rgba(108, 99, 255, 0.5);
+        border-color: rgba(212, 163, 115, 0.35);
     }
 }
 
@@ -420,10 +420,10 @@ textarea {
 @keyframes textGlow {
     0%,
     100% {
-        text-shadow: 0 0 10px rgba(108, 99, 255, 0.3);
+        text-shadow: 0 0 10px rgba(212, 163, 115, 0.15);
     }
     50% {
-        text-shadow: 0 0 20px rgba(108, 99, 255, 0.6);
+        text-shadow: 0 0 20px rgba(212, 163, 115, 0.3);
     }
 }
 
@@ -526,12 +526,12 @@ textarea {
     text-transform: uppercase;
     letter-spacing: 3px;
     font-size: var(--text-xs);
-    color: var(--color-primary);
+    color: var(--color-secondary);
     font-weight: 600;
     display: inline-block;
     padding: var(--space-2) var(--space-5);
-    background: rgba(108, 99, 255, 0.08);
-    border: 1px solid rgba(108, 99, 255, 0.15);
+    background: rgba(212, 163, 115, 0.1);
+    border: 1px solid rgba(212, 163, 115, 0.2);
     border-radius: var(--radius-full);
     margin-bottom: var(--space-5);
     line-height: 1.4;
@@ -645,14 +645,14 @@ textarea {
 /* — Outline Button — */
 .btn-outline {
     background: transparent;
-    border: 1px solid rgba(108, 99, 255, 0.4);
+    border: 1px solid rgba(0, 0, 0, 0.15);
     color: var(--color-primary);
 }
 
 .btn-outline:hover {
-    background: rgba(108, 99, 255, 0.08);
+    background: rgba(0, 0, 0, 0.04);
     border-color: var(--color-primary);
-    color: #ffffff;
+    color: var(--color-primary);
     transform: translateY(-3px);
 }
 
@@ -696,7 +696,7 @@ textarea {
 
 .btn-ghost:hover {
     color: var(--color-text);
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 /* ============================================================
@@ -716,9 +716,9 @@ textarea {
 }
 
 .badge-primary {
-    background: rgba(108, 99, 255, 0.1);
+    background: rgba(26, 26, 26, 0.06);
     color: var(--color-primary);
-    border: 1px solid rgba(108, 99, 255, 0.2);
+    border: 1px solid rgba(26, 26, 26, 0.12);
 }
 
 .badge-success {
@@ -740,9 +740,9 @@ textarea {
 }
 
 .badge-accent {
-    background: rgba(0, 217, 255, 0.08);
+    background: rgba(163, 177, 138, 0.1);
     color: var(--color-accent);
-    border: 1px solid rgba(0, 217, 255, 0.2);
+    border: 1px solid rgba(163, 177, 138, 0.25);
 }
 
 /* ============================================================
@@ -900,12 +900,12 @@ textarea {
 
 .nav-links a:hover {
     color: var(--color-text);
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .nav-links a.active {
-    color: var(--color-primary);
-    background: rgba(108, 99, 255, 0.08);
+    color: var(--color-secondary);
+    background: rgba(212, 163, 115, 0.08);
 }
 
 .nav-links a.active::after {
@@ -928,25 +928,25 @@ textarea {
     border-radius: var(--radius-full) !important;
     font-weight: 600 !important;
     font-size: 0.85rem !important;
-    box-shadow: 0 4px 20px rgba(108, 99, 255, 0.3);
+    box-shadow: 0 4px 20px rgba(26, 26, 26, 0.15);
     transition: all var(--transition-base) var(--ease-out) !important;
     border: none;
 }
 
 .nav-cta:hover {
     transform: translateY(-2px) !important;
-    box-shadow: 0 8px 30px rgba(108, 99, 255, 0.4) !important;
+    box-shadow: 0 8px 30px rgba(26, 26, 26, 0.2) !important;
     background: var(--gradient-primary) !important;
 }
 
 /* — Navbar Scrolled State — */
 .navbar.scrolled {
-    background: rgba(10, 10, 18, 0.85);
+    background: rgba(245, 242, 237, 0.9);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     padding: 12px 0;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
 }
 
 /* — Hamburger — */
@@ -993,7 +993,7 @@ textarea {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.3);
     z-index: 999;
     opacity: 0;
     transition: opacity var(--transition-base) var(--ease-out);
@@ -1032,7 +1032,7 @@ textarea {
     right: -10%;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(108, 99, 255, 0.12), transparent 70%);
+    background: radial-gradient(circle, rgba(212, 163, 115, 0.1), transparent 70%);
     animation: morphBlob 15s ease-in-out infinite;
     filter: blur(40px);
 }
@@ -1043,7 +1043,7 @@ textarea {
     left: -15%;
     width: 700px;
     height: 700px;
-    background: radial-gradient(circle, rgba(255, 101, 132, 0.08), transparent 70%);
+    background: radial-gradient(circle, rgba(163, 177, 138, 0.08), transparent 70%);
     animation: morphBlob 20s ease-in-out infinite reverse;
     filter: blur(40px);
 }
@@ -1054,7 +1054,7 @@ textarea {
     left: 50%;
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(0, 217, 255, 0.06), transparent 70%);
+    background: radial-gradient(circle, rgba(212, 163, 115, 0.06), transparent 70%);
     animation: float 12s ease-in-out infinite;
     filter: blur(30px);
     transform: translateX(-50%);
@@ -1063,7 +1063,7 @@ textarea {
 /* — Floating Shapes — */
 .floating-shape {
     position: absolute;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
     pointer-events: none;
 }
 
@@ -1243,7 +1243,7 @@ textarea {
     bottom: 0;
     background: radial-gradient(
         600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        rgba(108, 99, 255, 0.04),
+        rgba(212, 163, 115, 0.04),
         transparent 40%
     );
     z-index: 0;
@@ -1259,8 +1259,8 @@ textarea {
 .service-card:hover {
     transform: translateY(-8px);
     border-color: var(--color-border-hover);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(108, 99, 255, 0.1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08),
+                0 0 0 1px rgba(0, 0, 0, 0.04);
 }
 
 /* — Service Icon — */
@@ -1272,8 +1272,8 @@ textarea {
     align-items: center;
     justify-content: center;
     margin-bottom: var(--space-6);
-    background: linear-gradient(135deg, rgba(108, 99, 255, 0.12), rgba(0, 217, 255, 0.08));
-    border: 1px solid rgba(108, 99, 255, 0.1);
+    background: linear-gradient(135deg, rgba(212, 163, 115, 0.12), rgba(163, 177, 138, 0.1));
+    border: 1px solid rgba(212, 163, 115, 0.12);
     position: relative;
     z-index: 1;
     transition: all var(--transition-slow) var(--ease-out);
@@ -1281,7 +1281,7 @@ textarea {
 
 .service-card:hover .service-icon {
     transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(108, 99, 255, 0.15);
+    box-shadow: 0 0 20px rgba(212, 163, 115, 0.1);
 }
 
 .service-emoji {
@@ -1414,8 +1414,8 @@ textarea {
 
 .stat-card:hover {
     transform: translateY(-4px);
-    border-color: rgba(108, 99, 255, 0.15);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    border-color: rgba(212, 163, 115, 0.2);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
 }
 
 /* — Stat Number — */
@@ -1476,8 +1476,8 @@ textarea {
 
 .blog-card:hover {
     transform: translateY(-6px);
-    border-color: rgba(108, 99, 255, 0.15);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
 }
 
 /* — Blog Card Image — */
@@ -1500,7 +1500,7 @@ textarea {
 
 /* — Blog Card Image Placeholder — */
 .blog-card-image-placeholder {
-    background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(255, 101, 132, 0.05));
+    background: linear-gradient(135deg, rgba(212, 163, 115, 0.08), rgba(163, 177, 138, 0.05));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1656,7 +1656,7 @@ textarea {
 }
 
 .breadcrumb-separator {
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(0, 0, 0, 0.2);
     font-size: 0.75rem;
 }
 
@@ -2021,7 +2021,7 @@ textarea {
 .form-input {
     width: 100%;
     padding: 16px 18px 16px 48px;
-    background: rgba(10, 10, 18, 0.6);
+    background: rgba(255, 255, 255, 0.8);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     color: var(--color-text);
@@ -2032,13 +2032,13 @@ textarea {
 }
 
 .form-input::placeholder {
-    color: rgba(139, 140, 160, 0.5);
+    color: rgba(107, 107, 107, 0.5);
 }
 
 .form-input:focus {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.1);
-    background: rgba(10, 10, 18, 0.9);
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.1);
+    background: rgba(255, 255, 255, 1);
 }
 
 .form-input:focus + .input-icon,
@@ -2055,7 +2055,7 @@ textarea {
 .form-textarea {
     width: 100%;
     padding: 16px 18px;
-    background: rgba(10, 10, 18, 0.6);
+    background: rgba(255, 255, 255, 0.8);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     color: var(--color-text);
@@ -2069,20 +2069,20 @@ textarea {
 }
 
 .form-textarea::placeholder {
-    color: rgba(139, 140, 160, 0.5);
+    color: rgba(107, 107, 107, 0.5);
 }
 
 .form-textarea:focus {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.1);
-    background: rgba(10, 10, 18, 0.9);
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.1);
+    background: rgba(255, 255, 255, 1);
 }
 
 /* — Form Select — */
 .form-select {
     width: 100%;
     padding: 16px 18px 16px 48px;
-    background: rgba(10, 10, 18, 0.6);
+    background: rgba(255, 255, 255, 0.8);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     color: var(--color-text);
@@ -2094,15 +2094,15 @@ textarea {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238B8CA0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6B6B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 16px center;
 }
 
 .form-select:focus {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.1);
-    background-color: rgba(10, 10, 18, 0.9);
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.1);
+    background-color: rgba(255, 255, 255, 1);
 }
 
 .form-select option {
@@ -2145,8 +2145,8 @@ textarea {
     display: inline-block;
     width: 20px;
     height: 20px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-top-color: #ffffff;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-top-color: var(--color-primary);
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -2181,7 +2181,7 @@ textarea {
 .contact-info-card:hover {
     border-color: var(--color-border-hover);
     transform: translateX(4px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 .contact-info-icon {
@@ -2192,9 +2192,9 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(0, 217, 255, 0.06));
+    background: linear-gradient(135deg, rgba(212, 163, 115, 0.1), rgba(163, 177, 138, 0.08));
     border-radius: var(--radius-lg);
-    border: 1px solid rgba(108, 99, 255, 0.08);
+    border: 1px solid rgba(212, 163, 115, 0.1);
 }
 
 .contact-info-details {
@@ -2239,7 +2239,7 @@ textarea {
 }
 
 .map-gradient {
-    background: linear-gradient(135deg, rgba(108, 99, 255, 0.08), rgba(0, 217, 255, 0.04));
+    background: linear-gradient(135deg, rgba(212, 163, 115, 0.06), rgba(163, 177, 138, 0.04));
     width: 100%;
     height: 100%;
     display: flex;
@@ -2272,10 +2272,10 @@ textarea {
     text-align: center;
     background: linear-gradient(
         135deg,
-        rgba(108, 99, 255, 0.15) 0%,
-        rgba(10, 10, 18, 1) 40%,
-        rgba(10, 10, 18, 1) 60%,
-        rgba(255, 101, 132, 0.1) 100%
+        rgba(212, 163, 115, 0.08) 0%,
+        rgba(245, 242, 237, 1) 40%,
+        rgba(245, 242, 237, 1) 60%,
+        rgba(163, 177, 138, 0.08) 100%
     );
 }
 
@@ -2293,7 +2293,7 @@ textarea {
     left: -10%;
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, rgba(108, 99, 255, 0.1), transparent 70%);
+    background: radial-gradient(circle, rgba(212, 163, 115, 0.08), transparent 70%);
     animation: morphBlob 18s ease-in-out infinite;
     filter: blur(40px);
 }
@@ -2304,7 +2304,7 @@ textarea {
     right: -10%;
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, rgba(255, 101, 132, 0.08), transparent 70%);
+    background: radial-gradient(circle, rgba(163, 177, 138, 0.06), transparent 70%);
     animation: morphBlob 22s ease-in-out infinite reverse;
     filter: blur(40px);
 }
@@ -2348,7 +2348,7 @@ textarea {
     position: relative;
     overflow: hidden;
     text-align: center;
-    background: linear-gradient(180deg, rgba(108, 99, 255, 0.06) 0%, var(--color-bg) 100%);
+    background: linear-gradient(180deg, rgba(212, 163, 115, 0.06) 0%, var(--color-bg) 100%);
 }
 
 /* — Page Hero Background — */
@@ -2365,7 +2365,7 @@ textarea {
     right: -15%;
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, rgba(108, 99, 255, 0.08), transparent 70%);
+    background: radial-gradient(circle, rgba(212, 163, 115, 0.06), transparent 70%);
     animation: morphBlob 20s ease-in-out infinite;
     filter: blur(50px);
 }
@@ -2376,7 +2376,7 @@ textarea {
     left: -10%;
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(0, 217, 255, 0.05), transparent 70%);
+    background: radial-gradient(circle, rgba(163, 177, 138, 0.05), transparent 70%);
     animation: morphBlob 25s ease-in-out infinite reverse;
     filter: blur(50px);
 }
@@ -2387,7 +2387,7 @@ textarea {
     left: 8%;
     width: 50px;
     height: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.04);
     border-radius: 10px;
     animation: float 10s ease-in-out infinite, rotateSlow 30s linear infinite;
 }
@@ -2398,7 +2398,7 @@ textarea {
     right: 10%;
     width: 35px;
     height: 35px;
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.04);
     border-radius: 50%;
     animation: floatReverse 8s ease-in-out infinite;
 }
@@ -2466,7 +2466,7 @@ textarea {
 .footer {
     background: var(--color-footer-bg);
     padding: 80px 0 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
     position: relative;
 }
 
@@ -2604,7 +2604,7 @@ textarea {
     align-items: center;
     justify-content: center;
     border-radius: var(--radius-lg);
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--color-border);
     color: var(--color-muted);
     transition: all var(--transition-base) var(--ease-out);
@@ -2617,18 +2617,18 @@ textarea {
 }
 
 .footer-social a:hover {
-    background: rgba(108, 99, 255, 0.1);
-    border-color: rgba(108, 99, 255, 0.3);
-    color: var(--color-primary);
+    background: rgba(212, 163, 115, 0.1);
+    border-color: rgba(212, 163, 115, 0.3);
+    color: var(--color-secondary);
     transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.15);
+    box-shadow: 0 4px 15px rgba(212, 163, 115, 0.1);
 }
 
 /* — Footer Bottom — */
 .footer-bottom {
     margin-top: 60px;
     padding: var(--space-6) 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
     text-align: center;
 }
 
@@ -2770,12 +2770,12 @@ textarea {
 .pricing-card:hover {
     transform: translateY(-6px);
     border-color: var(--color-border-hover);
-    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.08);
 }
 
 .pricing-card.featured {
-    border-color: rgba(108, 99, 255, 0.3);
-    background: rgba(108, 99, 255, 0.04);
+    border-color: rgba(212, 163, 115, 0.3);
+    background: rgba(212, 163, 115, 0.04);
 }
 
 .pricing-card.featured::before {
@@ -4658,8 +4658,8 @@ body.no-scroll {
 
 @media (prefers-contrast: high) {
     :root {
-        --color-border: rgba(255, 255, 255, 0.2);
-        --color-muted: #B0B1C0;
+        --color-border: rgba(0, 0, 0, 0.2);
+        --color-muted: #555555;
     }
 
     .glass-card,
