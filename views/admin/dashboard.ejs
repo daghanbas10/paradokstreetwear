@@ -61,6 +61,58 @@
     </div>
 </div>
 
+<!-- Hızlı Erişim -->
+<div class="admin-section">
+    <h2 class="admin-section-title" style="margin-bottom: 1rem;">⚡ Hızlı Erişim</h2>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+        <a href="/admin/blog/new" style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; text-decoration: none; color: #FFFFFE; transition: all 0.3s ease;">
+            <span style="font-size: 1.4rem;">📝</span>
+            <span style="font-size: 0.85rem; font-weight: 500;">Yeni Blog Yazısı</span>
+        </a>
+        <a href="/admin/members" style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; text-decoration: none; color: #FFFFFE; transition: all 0.3s ease;">
+            <span style="font-size: 1.4rem;">👥</span>
+            <span style="font-size: 0.85rem; font-weight: 500;">Üyeleri Görüntüle</span>
+        </a>
+        <a href="/admin/members/export" style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; text-decoration: none; color: #FFFFFE; transition: all 0.3s ease;">
+            <span style="font-size: 1.4rem;">📥</span>
+            <span style="font-size: 0.85rem; font-weight: 500;">CSV İndir</span>
+        </a>
+        <a href="/admin/messages" style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; text-decoration: none; color: #FFFFFE; transition: all 0.3s ease;">
+            <span style="font-size: 1.4rem;">📧</span>
+            <span style="font-size: 0.85rem; font-weight: 500;">Mesajları Kontrol Et</span>
+        </a>
+        <a href="/admin/content" style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; text-decoration: none; color: #FFFFFE; transition: all 0.3s ease;">
+            <span style="font-size: 1.4rem;">⚙️</span>
+            <span style="font-size: 0.85rem; font-weight: 500;">Site İçerikleri</span>
+        </a>
+        <a href="/admin/settings" style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; text-decoration: none; color: #FFFFFE; transition: all 0.3s ease;">
+            <span style="font-size: 1.4rem;">🔐</span>
+            <span style="font-size: 0.85rem; font-weight: 500;">Hesap Ayarları</span>
+        </a>
+    </div>
+</div>
+
+<!-- Sistem Bilgisi -->
+<div class="admin-section">
+    <div class="glass-card-admin" style="padding: 20px 24px;">
+        <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: #22C55E; display: inline-block;"></span>
+                <span style="color: #A7A9BE; font-size: 0.8rem;">Sunucu: <strong style="color: #22C55E;">Aktif</strong></span>
+            </div>
+            <div style="color: #A7A9BE; font-size: 0.8rem;">Platform: <strong style="color: #FFFFFE;">Render.com</strong></div>
+            <div style="color: #A7A9BE; font-size: 0.8rem;">Giriş: <strong style="color: #FFFFFE;"><%= typeof adminUsername !== 'undefined' ? adminUsername : 'Admin' %></strong></div>
+            <div style="color: #A7A9BE; font-size: 0.8rem;">Tarih: <strong style="color: #FFFFFE;"><%= new Date().toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' }) %></strong></div>
+            <a href="/" target="_blank" style="margin-left: auto; color: #6C63FF; text-decoration: none; font-size: 0.8rem; font-weight: 600;">🌐 Siteyi Gör →</a>
+        </div>
+    </div>
+</div>
+
+<style>
+.admin-section a[href]:hover { background: rgba(108,99,255,0.1) !important; border-color: rgba(108,99,255,0.3) !important; transform: translateY(-2px); }
+@media (max-width: 768px) { .admin-section div[style*="grid-template-columns: repeat(3"] { grid-template-columns: repeat(2, 1fr) !important; } }
+</style>
+
 <!-- Son Mesajlar Tablosu -->
 <div class="admin-section">
     <div class="admin-section-header">

@@ -16,6 +16,27 @@
     </a>
 </div>
 
+<!-- Arama & Filtre -->
+<div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 1.5rem; align-items: center;">
+    <input type="text" id="memberSearch" placeholder="🔍 İsim veya e-posta ara..." style="flex: 1; min-width: 200px; padding: 10px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #FFFFFE; font-family: 'Inter', sans-serif; font-size: 0.85rem; outline: none; transition: border-color 0.3s;">
+    <select id="filterCategory" style="padding: 10px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #FFFFFE; font-family: 'Inter', sans-serif; font-size: 0.85rem; outline: none; cursor: pointer;">
+        <option value="">Tüm Kategoriler</option>
+        <option value="erkek">👔 Erkek</option>
+        <option value="kadin">🌸 Kadın</option>
+        <option value="hepsi">🔥 Hepsi</option>
+    </select>
+    <select id="filterSize" style="padding: 10px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #FFFFFE; font-family: 'Inter', sans-serif; font-size: 0.85rem; outline: none; cursor: pointer;">
+        <option value="">Tüm Bedenler</option>
+        <option value="xs">XS</option>
+        <option value="s">S</option>
+        <option value="m">M</option>
+        <option value="l">L</option>
+        <option value="xl">XL</option>
+        <option value="xxl">XXL</option>
+    </select>
+    <span id="filterCount" style="color: #A7A9BE; font-size: 0.8rem;"></span>
+</div>
+
 <!-- Üye Tablosu -->
 <div class="admin-table-wrapper glass-card-admin">
     <% if (members && members.length > 0) { %>
@@ -88,6 +109,39 @@
 </div>
 
 <script>
+// Arama ve Filtre
+function filterMembers() {
+    const search = document.getElementById('memberSearch').value.toLowerCase();
+    const cat = document.getElementById('filterCategory').value;
+    const size = document.getElementById('filterSize').value;
+    const rows = document.querySelectorAll('tbody tr[id^="member-row"]');
+    let visible = 0;
+    
+    rows.forEach(row => {
+        const name = (row.cells[1]?.textContent || '').toLowerCase();
+        const email = (row.cells[2]?.textContent || '').toLowerCase();
+        const rowCat = (row.cells[4]?.textContent || '').toLowerCase();
+        const rowSize = (row.cells[5]?.textContent || '').toLowerCase().trim();
+        
+        const matchSearch = !search || name.includes(search) || email.includes(search);
+        const matchCat = !cat || rowCat.includes(cat === 'erkek' ? 'erkek' : cat === 'kadin' ? 'kadın' : 'hepsi');
+        const matchSize = !size || rowSize === size.toUpperCase() || rowSize === size;
+        
+        if (matchSearch && matchCat && matchSize) {
+            row.style.display = '';
+            visible++;
+        } else {
+            row.style.display = 'none';
+        }
+    });
+    
+    document.getElementById('filterCount').textContent = visible + ' / ' + rows.length + ' üye gösteriliyor';
+}
+
+document.getElementById('memberSearch').addEventListener('input', filterMembers);
+document.getElementById('filterCategory').addEventListener('change', filterMembers);
+document.getElementById('filterSize').addEventListener('change', filterMembers);
+filterMembers();
 async function deleteMember(id) {
     if (!confirm('Bu üyeyi silmek istediğinize emin misiniz?')) return;
     
