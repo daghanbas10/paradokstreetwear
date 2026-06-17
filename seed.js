@@ -23,88 +23,115 @@ async function seed() {
   insertAdmin.run(adminUsername, hashedPassword);
   console.log(`✓ Admin kullanıcısı oluşturuldu: ${adminUsername}`);
 
-  // ── Örnek blog yazıları ────────────────────────────────────────────
+  // ── Blog yazıları ────────────────────────────────────────────────
 
   const insertPost = db.prepare(
-    'INSERT OR IGNORE INTO posts (title, slug, content, excerpt, is_published, created_at) VALUES (?, ?, ?, ?, 1, ?)'
+    'INSERT OR REPLACE INTO posts (id, title, slug, content, excerpt, cover_image, is_published, created_at) VALUES (?, ?, ?, ?, ?, ?, 1, ?)'
   );
 
   const samplePosts = [
     {
-      title: 'Dijital Dönüşümde Başarının Anahtarları',
-      slug: 'dijital-donusumde-basarinin-anahtarlari',
-      content: `<h2>Dijital Dönüşüm Nedir?</h2>
-<p>Dijital dönüşüm, bir organizasyonun iş süreçlerini, kültürünü ve müşteri deneyimlerini dijital teknolojiler aracılığıyla yeniden şekillendirmesidir.</p>
+      id: 1,
+      title: 'Oversize Tişört Nasıl Kombinlenir? 7 Sokak Stili İlhamı',
+      slug: 'oversize-tisort-nasil-kombinlenir',
+      cover_image: '/uploads/blog-tshirt.png',
+      content: `<h2>Oversize Tişört: Sokağın Vazgeçilmezi</h2>
+<p>Oversize tişört, streetwear kültürünün temel taşıdır. Ama doğru kombinlenmezse "evde oturuyorum" havasına bürünür. İşte profesyonel gibi oversize giymek için 7 altın kural:</p>
 
-<h2>Başarı İçin Temel Adımlar</h2>
-<ol>
-  <li><strong>Strateji Belirleyin:</strong> Dijital dönüşüm yolculuğunuza net bir strateji ile başlayın.</li>
-  <li><strong>Ekibinizi Eğitin:</strong> Çalışanlarınızın dijital yetkinliklerini artırın.</li>
-  <li><strong>Müşteri Odaklı Olun:</strong> Tüm dijital girişimlerinizi müşteri ihtiyaçlarına göre şekillendirin.</li>
-  <li><strong>Veriyi Kullanın:</strong> Karar alma süreçlerinizi veriye dayalı hale getirin.</li>
-  <li><strong>Çevik Olun:</strong> Değişime hızlı adapte olabilecek yapılar kurun.</li>
-</ol>
-<p>Dijital dönüşüm bir maraton, sprint değildir. Sabırlı ve kararlı adımlarla hedefe ulaşabilirsiniz.</p>`,
-      excerpt: 'İşletmelerin dijital dönüşüm sürecinde başarılı olabilmesi için atması gereken temel adımları keşfedin.',
-      created_at: '2024-12-15 10:00:00'
+<h2>1. Altına Slim Fit veya Tapered Pantolon</h2>
+<p>Üst geniş, alt dar — bu kontrast vücudunu dengeler. Siyah skinny jean veya tapered jogger ideal eşlikçilerdir.</p>
+
+<h2>2. Katmanlama Sanatı</h2>
+<p>Oversize tişörtün altına uzun kollu beyaz tişört giy. Kol uçları ve etek kısmı görünsün. Bu "layering" tekniği anında seviye atlatır.</p>
+
+<h2>3. Aksesuar ile Fark Yarat</h2>
+<p>Zincir kolye, bucket hat veya crossbody çanta ekle. Minimalizmi aksesuarla kır.</p>
+
+<h2>4. Sneaker Seçimi Kritik</h2>
+<p>Chunky sneaker veya Air Force 1 gibi klasikler oversize ile mükemmel uyum sağlar. Dar ayakkabılardan kaçın.</p>
+
+<h2>5. Renk Paleti Oluştur</h2>
+<p>Monokrom (tek renk tonları) veya complementary (zıt renkler) paletlerle kombin kur. Rastgele renk seçme.</p>
+
+<h2>6. Front Tuck Tekniği</h2>
+<p>Tişörtün ön kısmını bele hafifçe sok, arkasını serbest bırak. Orantıyı kurtarır ve beli tanımlar.</p>
+
+<h2>7. Güven En İyi Aksesuar</h2>
+<p>Ne giyersen giy, eğer rahat hissediyorsan doğru yoldasın. Sokak stili kuralları yıkmakla ilgilidir.</p>
+
+<blockquote>PARADOKS oversize tişörtleri 300gsm heavy-weight penye pamuktan üretilir. Pre-shrunk teknolojisiyle yıkamada küçülme yapmaz.</blockquote>`,
+      excerpt: 'Oversize tişörtü sokak stilinde profesyonel gibi kombinlemenin 7 altın kuralı. Layering tekniklerinden aksesuar seçimine kadar her şey.',
+      created_at: '2026-06-01 10:00:00'
     },
     {
-      title: 'Müşteri Memnuniyetini Artırmanın 5 Yolu',
-      slug: 'musteri-memnuniyetini-artirmanin-5-yolu',
-      content: `<h2>1. Müşterilerinizi Dinleyin</h2>
-<p>Aktif dinleme, müşteri memnuniyetinin temelidir. Geri bildirimleri düzenli olarak toplayın ve analiz edin.</p>
+      id: 2,
+      title: 'Hoodie Kültürü: Kapüşonlunun Sokaktan Podyuma Yolculuğu',
+      slug: 'hoodie-kulturu-kapusonlunun-yolculugu',
+      cover_image: '/uploads/blog-hoodie.png',
+      content: `<h2>Bir Kapüşonun Hikâyesi</h2>
+<p>1930'larda New York'taki depo işçileri için üretilen hoodie, bugün milyar dolarlık moda endüstrisinin en ikonik parçası. Peki bu dönüşüm nasıl oldu?</p>
 
-<h2>2. Hızlı ve Etkili İletişim</h2>
-<p>Müşterilerinizin sorularına ve sorunlarına hızlı yanıt verin. Çok kanallı iletişim stratejisi oluşturun.</p>
+<h2>Hip-Hop ve Hoodie</h2>
+<p>80'lerde Run-DMC ve LL Cool J gibi hip-hop sanatçıları hoodie'yi sahneye taşıdı. Artık hoodie sadece bir kıyafet değil, bir tutumdu — sisteme karşı duruşun sembolü.</p>
 
-<h2>3. Kişiselleştirilmiş Deneyim</h2>
-<p>Her müşterinin benzersiz olduğunu unutmayın. Kişiselleştirilmiş öneriler ve bireysel ilgi müşteri bağlılığını artırır.</p>
+<h2>Skate Kültürü Etkisi</h2>
+<p>90'larda Thrasher ve Supreme gibi markalar hoodie'yi skate kültürüyle birleştirdi. Kapüşonlu, grafiti desenli, yırtık — ne kadar "kirli" o kadar cool.</p>
 
-<h2>4. Kaliteyi Sürekli İyileştirin</h2>
-<p>Ürün ve hizmet kalitenizi sürekli olarak geliştirin. Müşteri geri bildirimlerini iyileştirme süreçlerinize dahil edin.</p>
+<h2>Lüks Markalar Sahneye Çıkıyor</h2>
+<p>2010'lardan itibaren Balenciaga, Vetements ve Off-White hoodie'yi lüks moda dünyasına taşıdı. 500$'lık hoodie'ler normalleşti.</p>
 
-<h2>5. Sadakat Programları Oluşturun</h2>
-<p>Sadık müşterilerinizi ödüllendirin. İndirimler, özel teklifler ve VIP avantajlar sunarak müşteri bağlılığını güçlendirin.</p>`,
-      excerpt: 'Müşteri memnuniyetini artırmak ve sadık bir müşteri kitlesi oluşturmak için uygulayabileceğiniz etkili stratejiler.',
-      created_at: '2024-12-20 14:30:00'
-    },
-    {
-      title: 'Modern Web Teknolojileri ve İşletmenize Katkıları',
-      slug: 'modern-web-teknolojileri-ve-isletmenize-katkilari',
-      content: `<h2>Neden Modern Web Teknolojileri?</h2>
-<p>Modern web teknolojileri, daha hızlı, güvenli ve kullanıcı dostu web uygulamaları geliştirmenizi sağlar:</p>
+<h2>PARADOKS Hoodie Farkı</h2>
+<p>Biz PARADOKS olarak hoodie'ye hak ettiği saygıyı veriyoruz:</p>
 <ul>
-  <li><strong>Performans:</strong> Sayfalar daha hızlı yüklenir, kullanıcı deneyimi iyileşir.</li>
-  <li><strong>Güvenlik:</strong> Modern güvenlik standartları ile verileriniz korunur.</li>
-  <li><strong>Ölçeklenebilirlik:</strong> İşletmeniz büyüdükçe altyapınız da büyüyebilir.</li>
-  <li><strong>Mobil Uyumluluk:</strong> Tüm cihazlarda sorunsuz çalışan uygulamalar geliştirebilirsiniz.</li>
+  <li><strong>400gsm French Terry:</strong> Dört mevsim konfor</li>
+  <li><strong>YKK Fermuar:</strong> Binlerce açılış-kapanışa dayanır</li>
+  <li><strong>Çift Katmanlı Kapüşon:</strong> Form kaybetmez</li>
+  <li><strong>Kanguru Cep:</strong> Telefon ve eller için mükemmel</li>
 </ul>
 
-<h2>Popüler Teknolojiler</h2>
-<h3>Node.js</h3>
-<p>Sunucu tarafında JavaScript çalıştırmanıza olanak tanır. Hızlı ve ölçeklenebilir uygulamalar için idealdir.</p>
+<blockquote>"Hoodie sadece bir kıyafet değil, bir zırhtır." — Anonim Sokak Filozofu</blockquote>`,
+      excerpt: 'Hoodie nasıl depo işçilerinin kıyafetinden milyar dolarlık moda ikonuna dönüştü? Hip-hop, skate ve lüks modanın kesiştiği hikâye.',
+      created_at: '2026-06-05 14:30:00'
+    },
+    {
+      id: 3,
+      title: '2026 Yaz Trendleri: Bu Yaz Ne Giyiyoruz?',
+      slug: '2026-yaz-trendleri',
+      cover_image: '/uploads/blog-shorts.png',
+      content: `<h2>Yaz 2026: Sokak Stilinde Sıcak Trendler</h2>
+<p>Bu yaz sokak modası daha cesur, daha renkli ve daha rahat. İşte kaçırmamanız gereken 5 trend:</p>
 
-<h3>React & Vue.js</h3>
-<p>Modern kullanıcı arayüzleri oluşturmak için güçlü araçlardır.</p>
+<h2>1. Mesh Şortlar Geri Döndü</h2>
+<p>Basketbol sahalarından sokaklara taşan mesh şortlar bu yazın yıldızı. Oversized tişört + mesh şort + chunky sneaker = yaz formülü.</p>
 
-<h3>Progressive Web Apps (PWA)</h3>
-<p>Web uygulamalarınıza mobil uygulama benzeri özellikler ekleyen bir yaklaşımdır.</p>
+<h2>2. Washed-Out Renkler</h2>
+<p>Solmuş efektli pastel tonlar her yerde. Özellikle lavanta, mint yeşili ve soluk turuncu öne çıkıyor.</p>
 
-<p>İşletmeniz için doğru teknolojiyi seçmek, uzman bir ekiple çalışmayı gerektirir. Biz bu konuda yanınızdayız.</p>`,
-      excerpt: 'Modern web teknolojilerinin işletmenize nasıl değer katabileceğini ve dijital varlığınızı nasıl güçlendirebileceğini öğrenin.',
-      created_at: '2024-12-25 09:15:00'
+<h2>3. Cargo Her Şey</h2>
+<p>Cargo şort, cargo pantolon, hatta cargo yelek. Cep detayları bu yazın olmazsa olmazı. Fonksiyonel ve şık.</p>
+
+<h2>4. Retro Spor Referansları</h2>
+<p>90'ların spor estetiği geri geldi. Çizgili şortlar, polo yaka tişörtler ve terry cloth kumaşlar trend.</p>
+
+<h2>5. Minimal Logolar</h2>
+<p>Büyük logolar yerini küçük, rafine işlemelere bırakıyor. Az ama öz — kaliteyi logonun büyüklüğü değil, kumaşın dokusu anlatıyor.</p>
+
+<h3>PARADOKS Yaz Koleksiyonu</h3>
+<p>Quick-dry kumaş, elastik bel ve fonksiyonel cepler ile İstanbul yazına özel tasarlandı. Terlemeden, stilinden ödün vermeden yaz geçir.</p>`,
+      excerpt: '2026 yazının en sıcak sokak stili trendleri: mesh şortlar, cargo detaylar, washed-out renkler ve retro spor referansları.',
+      created_at: '2026-06-10 09:15:00'
     }
   ];
 
   // Blog yazılarını ekle
   const insertPosts = db.transaction((posts) => {
     for (const post of posts) {
-      insertPost.run(post.title, post.slug, post.content, post.excerpt, post.created_at);
+      insertPost.run(post.id, post.title, post.slug, post.content, post.excerpt, post.cover_image, post.created_at);
     }
   });
 
   insertPosts(samplePosts);
-  console.log(`✓ ${samplePosts.length} örnek blog yazısı oluşturuldu`);
+  console.log(`✓ ${samplePosts.length} blog yazısı güncellendi`);
 
   // ── Örnek mesajlar ─────────────────────────────────────────────────
 
@@ -114,24 +141,23 @@ async function seed() {
 
   const sampleMessages = [
     {
-      name: 'Ahmet Yılmaz',
-      email: 'ahmet@example.com',
+      name: 'Arda Korkmaz',
+      email: 'arda@example.com',
       phone: '+90 532 111 2233',
-      subject: 'Hizmetleriniz Hakkında Bilgi',
-      message: 'Merhaba, şirketinizin sunduğu dijital dönüşüm hizmetleri hakkında detaylı bilgi almak istiyorum. Özellikle küçük ve orta ölçekli işletmelere yönelik paketleriniz var mı?',
-      created_at: '2024-12-28 11:30:00'
+      subject: 'Toptan Sipariş',
+      message: 'Merhaba, mağazamız için PARADOKS ürünlerinden toptan sipariş vermek istiyoruz. Hoodie ve oversize tişört kategorilerinde fiyat bilgisi alabilir miyiz?',
+      created_at: '2026-06-12 11:30:00'
     },
     {
-      name: 'Elif Kaya',
-      email: 'elif.kaya@example.com',
+      name: 'Zeynep Aydın',
+      email: 'zeynep@example.com',
       phone: '+90 544 222 3344',
-      subject: 'Web Sitesi Projesi Teklifi',
-      message: 'İyi günler, e-ticaret sitemizin yeniden tasarlanması için bir teklif almak istiyoruz. Mevcut sitemiz oldukça eski ve mobil uyumlu değil.',
-      created_at: '2024-12-30 15:45:00'
+      subject: 'Limited Edition Bilgi',
+      message: 'Yeni limited edition drop ne zaman çıkacak? Instagram sayfanızdan takip ediyorum, çok merak ediyorum!',
+      created_at: '2026-06-14 15:45:00'
     }
   ];
 
-  // Mesajları ekle
   const insertMessages = db.transaction((messages) => {
     for (const msg of messages) {
       insertMessage.run(msg.name, msg.email, msg.phone, msg.subject, msg.message, msg.created_at);

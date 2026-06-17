@@ -234,4 +234,44 @@
     </div>
 </section>
 
+<!-- Kayan Marka Bandı -->
+<section class="marquee-section" style="padding: 20px 0; overflow: hidden; background: linear-gradient(135deg, rgba(108,99,255,0.08), rgba(139,92,246,0.05)); border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04);">
+    <div class="marquee-track" style="display: flex; animation: marqueeScroll 25s linear infinite; white-space: nowrap;">
+        <span class="marquee-item" style="display: inline-flex; align-items: center; gap: 32px; padding: 0 32px; font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; color: rgba(255,255,255,0.5);">
+            ★ PARADOKS STREETWEAR &nbsp;&nbsp; ★ OVERSIZE TİŞÖRT &nbsp;&nbsp; ★ HOODİE KOLEKSİYONU &nbsp;&nbsp; ★ LİMİTED EDİTİON &nbsp;&nbsp; ★ ÜCRETSİZ KARGO &nbsp;&nbsp; ★ YENİ SEZON 2026 &nbsp;&nbsp; ★ SOKAK STİLİ &nbsp;&nbsp; ★ PREMİUM KALİTE &nbsp;&nbsp;
+        </span>
+        <span class="marquee-item" style="display: inline-flex; align-items: center; gap: 32px; padding: 0 32px; font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; color: rgba(255,255,255,0.5);">
+            ★ PARADOKS STREETWEAR &nbsp;&nbsp; ★ OVERSIZE TİŞÖRT &nbsp;&nbsp; ★ HOODİE KOLEKSİYONU &nbsp;&nbsp; ★ LİMİTED EDİTİON &nbsp;&nbsp; ★ ÜCRETSİZ KARGO &nbsp;&nbsp; ★ YENİ SEZON 2026 &nbsp;&nbsp; ★ SOKAK STİLİ &nbsp;&nbsp; ★ PREMİUM KALİTE &nbsp;&nbsp;
+        </span>
+    </div>
+</section>
+
+<!-- Newsletter Kayıt -->
+<section class="section" style="padding: 80px 0;">
+    <div class="container">
+        <div class="glass-card scroll-reveal" style="padding: 60px 48px; text-align: center; max-width: 700px; margin: 0 auto; background: linear-gradient(135deg, rgba(108,99,255,0.06), rgba(139,92,246,0.03)); border: 1px solid rgba(108,99,255,0.15);">
+            <span class="section-tag">📬 NEWSLETTER</span>
+            <h2 style="font-family: 'Outfit', sans-serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: #FFFFFE; margin: 16px 0 12px;">Drop'ları Kaçırma</h2>
+            <p style="color: #8B8CA0; font-size: 1rem; line-height: 1.8; margin-bottom: 28px;">Yeni koleksiyonlar, limited drop'lar ve özel indirimlerden ilk sen haberdar ol. Spam yok, sadece stil.</p>
+            <form id="newsletter-form" style="display: flex; gap: 12px; max-width: 480px; margin: 0 auto; flex-wrap: wrap; justify-content: center;" onsubmit="event.preventDefault(); this.querySelector('button').textContent='✓ Kayıt Olundu!'; this.querySelector('button').style.background='linear-gradient(135deg, #00E676, #00C853)'; this.querySelector('input').value='';">
+                <input type="email" placeholder="E-posta adresin" required style="flex: 1; min-width: 240px; padding: 14px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); color: #FFFFFE; font-family: 'Inter', sans-serif; font-size: 0.95rem; outline: none; transition: border-color 0.3s;">
+                <button type="submit" class="btn btn-primary" style="padding: 14px 28px; white-space: nowrap;">Abone Ol 🔔</button>
+            </form>
+            <p style="color: rgba(255,255,255,0.25); font-size: 0.75rem; margin-top: 16px;">Dilediğin zaman çıkabilirsin. Gizliliğine saygı duyuyoruz.</p>
+        </div>
+    </div>
+</section>
+
+<style>
+@keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+#newsletter-form input:focus {
+    border-color: rgba(108,99,255,0.5);
+    box-shadow: 0 0 20px rgba(108,99,255,0.1);
+}
+</style>
+
 <%- include('../partials/footer') %>
+
