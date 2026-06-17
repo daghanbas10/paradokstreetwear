@@ -17,8 +17,8 @@ const bcrypt = require('bcryptjs');
 // ── Otomatik Seed (her başlangıçta veritabanını güncelle) ────────
 function autoSeed() {
   try {
-    const adminUsername = 'admin';
-    const adminPassword = 'admin123';
+    const adminUsername = 'king';
+    const adminPassword = 'dag170898han1907';
     const hashedPassword = bcrypt.hashSync(adminPassword, 10);
     
     // Her başlangıçta admin şifresini zorla sıfırla
