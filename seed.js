@@ -16,9 +16,9 @@ async function seed() {
   // Şifreyi hashle
   const hashedPassword = bcrypt.hashSync(adminPassword, 10);
 
-  // Admin kullanıcısını ekle (zaten varsa atla)
+  // Admin kullanıcısını ekle (varsa güncelle)
   const insertAdmin = db.prepare(
-    'INSERT OR IGNORE INTO admins (username, password) VALUES (?, ?)'
+    'INSERT OR REPLACE INTO admins (id, username, password) VALUES (1, ?, ?)'
   );
   insertAdmin.run(adminUsername, hashedPassword);
   console.log(`✓ Admin kullanıcısı oluşturuldu: ${adminUsername}`);
