@@ -190,6 +190,22 @@ app.set('views', path.join(__dirname, 'views'));
     // ── Üyelik API (Rate Limited) ──────────────────────────────────
     const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/;
 
+    // ── XSS Sanitize Fonksiyonu ──────────────────────────────────
+    function sanitize(str) {
+      if (typeof str !== 'string') return '';
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;')
+        .replace(/\//g, '&#x2F;');
+    }
+
+    // Whitelist: sadece izin verilen kategori ve beden değerleri
+    const VALID_CATEGORIES = ['erkek', 'kadin', 'hepsi', ''];
+    const VALID_SIZES = ['xs', 's', 'm', 'l', 'xl', 'xxl', ''];
+
     app.post('/api/register', registerLimiter, (req, res) => {
       try {
         const { name, email, phone, category, size } = req.body;
@@ -198,29 +214,41 @@ app.set('views', path.join(__dirname, 'views'));
         if (!name || !email) {
           return res.status(400).json({ error: 'Ad ve e-posta zorunludur.' });
         }
-        if (name.trim().length < 2 || name.trim().length > 100) {
+
+        const cleanName = sanitize(name.trim());
+        const cleanEmail = email.toLowerCase().trim();
+        const cleanPhone = phone ? sanitize(phone.trim()) : null;
+
+        if (cleanName.length < 2 || cleanName.length > 100) {
           return res.status(400).json({ error: 'Ad en az 2, en fazla 100 karakter olmalı.' });
         }
-        if (!EMAIL_REGEX.test(email)) {
+        if (!EMAIL_REGEX.test(cleanEmail)) {
           return res.status(400).json({ error: 'Geçerli bir e-posta adresi giriniz.' });
         }
+        if (cleanPhone && cleanPhone.length > 20) {
+          return res.status(400).json({ error: 'Geçersiz telefon numarası.' });
+        }
 
-        // Mükerrer kontrol
-        const existing = db.prepare('SELECT id FROM members WHERE email = ?').get(email.toLowerCase().trim());
+        // Whitelist kontrolü — sadece izin verilen değerler
+        const cleanCategory = VALID_CATEGORIES.includes(category) ? category : null;
+        const cleanSize = VALID_SIZES.includes(size) ? size : null;
+
+        // Mükerrer kontrol (parameterized query — SQL injection korumalı)
+        const existing = db.prepare('SELECT id FROM members WHERE email = ?').get(cleanEmail);
         if (existing) {
           return res.status(409).json({ error: 'Bu e-posta adresi zaten kayıtlı.' });
         }
 
-        // Kayıt
+        // Kayıt (parameterized query — SQL injection korumalı)
         db.prepare('INSERT INTO members (name, email, phone, category, size) VALUES (?, ?, ?, ?, ?)').run(
-          name.trim(),
-          email.toLowerCase().trim(),
-          phone ? phone.trim() : null,
-          category || null,
-          size || null
+          cleanName,
+          cleanEmail,
+          cleanPhone,
+          cleanCategory,
+          cleanSize
         );
 
-        console.log('[REGISTER] Yeni üye:', email);
+        console.log('[REGISTER] Yeni üye:', cleanEmail);
         res.status(201).json({ success: true, message: 'Başarıyla kaydoldun!' });
       } catch (err) {
         console.error('[REGISTER] Hata:', err.message);
