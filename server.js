@@ -212,20 +212,31 @@ app.set('views', path.join(__dirname, 'views'));
       try {
         const { name, email, phone, category, size } = req.body;
 
-        // Validasyon
-        if (!name || !email) {
-          return res.status(400).json({ error: 'Ad ve e-posta zorunludur.' });
+        // Tip kontrolü — sadece string kabul et (NoSQL injection koruması)
+        if (typeof name !== 'string' || typeof email !== 'string') {
+          return res.status(400).json({ error: 'Geçersiz veri formatı.' });
+        }
+        if (phone && typeof phone !== 'string') {
+          return res.status(400).json({ error: 'Geçersiz veri formatı.' });
         }
 
+        // Trim + Sanitize
         const cleanName = sanitize(name.trim());
         const cleanEmail = email.toLowerCase().trim();
-        const cleanPhone = phone ? sanitize(phone.trim()) : null;
+        const cleanPhone = phone ? sanitize(String(phone).trim()) : null;
 
+        // Boşluk kontrolü
+        if (!cleanName || !cleanEmail) {
+          return res.status(400).json({ error: 'Ad ve e-posta alanları boş bırakılamaz.' });
+        }
         if (cleanName.length < 2 || cleanName.length > 100) {
           return res.status(400).json({ error: 'Ad en az 2, en fazla 100 karakter olmalı.' });
         }
         if (!EMAIL_REGEX.test(cleanEmail)) {
           return res.status(400).json({ error: 'Geçerli bir e-posta adresi giriniz.' });
+        }
+        if (cleanEmail.length > 254) {
+          return res.status(400).json({ error: 'E-posta adresi çok uzun.' });
         }
         if (cleanPhone && cleanPhone.length > 20) {
           return res.status(400).json({ error: 'Geçersiz telefon numarası.' });
@@ -238,7 +249,7 @@ app.set('views', path.join(__dirname, 'views'));
         // Mükerrer kontrol (parameterized query — SQL injection korumalı)
         const existing = db.prepare('SELECT id FROM members WHERE email = ?').get(cleanEmail);
         if (existing) {
-          return res.status(409).json({ error: 'Bu e-posta adresi zaten kayıtlı.' });
+          return res.status(409).json({ error: 'Bu e-posta adresiyle zaten arşive katıldınız. 2027 geri sayımını beklemede kalın! 🚀' });
         }
 
         // Kayıt (parameterized query — SQL injection korumalı)
@@ -254,7 +265,11 @@ app.set('views', path.join(__dirname, 'views'));
         res.status(201).json({ success: true, message: 'Başarıyla kaydoldun!' });
       } catch (err) {
         console.error('[REGISTER] Hata:', err.message);
-        res.status(500).json({ error: 'Sunucu hatası. Lütfen tekrar deneyin.' });
+        // UNIQUE constraint hatası (DB seviyesinde çift kayıt engeli)
+        if (err.message && err.message.includes('UNIQUE')) {
+          return res.status(409).json({ error: 'Bu e-posta adresiyle zaten arşive katıldınız. 2027 geri sayımını beklemede kalın! 🚀' });
+        }
+        res.status(500).json({ error: 'Bir şeyler ters gitti. Lütfen tekrar deneyin.' });
       }
     });
 
