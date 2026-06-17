@@ -256,31 +256,31 @@
                 <p style="color: #6B6B6B; font-size: 0.9rem; line-height: 1.7;">Yeni drop'lar, özel kampanyalar ve early access fırsatlarından ilk sen haberdar ol.</p>
             </div>
 
-            <form id="membership-form" onsubmit="event.preventDefault(); if(!document.getElementById('kvkk').checked){document.querySelector('.kvkk-warn').style.display='block';return;} document.querySelector('.kvkk-warn').style.display='none'; document.getElementById('form-success').style.display='flex'; this.style.display='none';">
+            <form id="membership-form">
 
                 <!-- Ad Soyad -->
                 <div style="margin-bottom: 16px;">
                     <label style="display:block; font-size:0.78rem; font-weight:600; color:#1A1A1A; margin-bottom:6px; letter-spacing:0.5px;">AD SOYAD</label>
-                    <input type="text" placeholder="Adın ve soyadın" required style="width:100%; padding:14px 18px; border-radius:12px; border:1px solid rgba(0,0,0,0.1); background:#FFFFFE; color:#1A1A1A; font-family:'Inter',sans-serif; font-size:0.9rem; outline:none; transition:all 0.3s ease; box-sizing:border-box;">
+                    <input type="text" name="name" placeholder="Adın ve soyadın" required minlength="2" maxlength="100" style="width:100%; padding:14px 18px; border-radius:12px; border:1px solid rgba(0,0,0,0.1); background:#FFFFFE; color:#1A1A1A; font-family:'Inter',sans-serif; font-size:0.9rem; outline:none; transition:all 0.3s ease; box-sizing:border-box;">
                 </div>
 
                 <!-- E-posta -->
                 <div style="margin-bottom: 16px;">
                     <label style="display:block; font-size:0.78rem; font-weight:600; color:#1A1A1A; margin-bottom:6px; letter-spacing:0.5px;">E-POSTA</label>
-                    <input type="email" placeholder="ornek@email.com" required style="width:100%; padding:14px 18px; border-radius:12px; border:1px solid rgba(0,0,0,0.1); background:#FFFFFE; color:#1A1A1A; font-family:'Inter',sans-serif; font-size:0.9rem; outline:none; transition:all 0.3s ease; box-sizing:border-box;">
+                    <input type="email" name="email" placeholder="ornek@email.com" required style="width:100%; padding:14px 18px; border-radius:12px; border:1px solid rgba(0,0,0,0.1); background:#FFFFFE; color:#1A1A1A; font-family:'Inter',sans-serif; font-size:0.9rem; outline:none; transition:all 0.3s ease; box-sizing:border-box;">
                 </div>
 
                 <!-- Telefon -->
                 <div style="margin-bottom: 16px;">
                     <label style="display:block; font-size:0.78rem; font-weight:600; color:#1A1A1A; margin-bottom:6px; letter-spacing:0.5px;">TELEFON <span style="color:#999; font-weight:400;">(opsiyonel)</span></label>
-                    <input type="tel" placeholder="05XX XXX XX XX" style="width:100%; padding:14px 18px; border-radius:12px; border:1px solid rgba(0,0,0,0.1); background:#FFFFFE; color:#1A1A1A; font-family:'Inter',sans-serif; font-size:0.9rem; outline:none; transition:all 0.3s ease; box-sizing:border-box;">
+                    <input type="tel" name="phone" placeholder="05XX XXX XX XX" style="width:100%; padding:14px 18px; border-radius:12px; border:1px solid rgba(0,0,0,0.1); background:#FFFFFE; color:#1A1A1A; font-family:'Inter',sans-serif; font-size:0.9rem; outline:none; transition:all 0.3s ease; box-sizing:border-box;">
                 </div>
 
                 <!-- Cinsiyet + Beden — iki sütun -->
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px;">
                     <div>
                         <label style="display:block; font-size:0.78rem; font-weight:600; color:#1A1A1A; margin-bottom:6px; letter-spacing:0.5px;">İLGİLENDİĞİN KATEGORİ</label>
-                        <select style="width:100%; padding:14px 18px; border-radius:12px; border:1px solid rgba(0,0,0,0.1); background:#FFFFFE; color:#1A1A1A; font-family:'Inter',sans-serif; font-size:0.9rem; outline:none; cursor:pointer; appearance:none; -webkit-appearance:none; background-image:url('data:image/svg+xml;utf8,<svg fill=\"%231A1A1A\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7 10l5 5 5-5z\"/></svg>'); background-repeat:no-repeat; background-position:right 14px center; background-size:18px; box-sizing:border-box;">
+                        <select name="category" style="width:100%; padding:14px 18px; border-radius:12px; border:1px solid rgba(0,0,0,0.1); background:#FFFFFE; color:#1A1A1A; font-family:'Inter',sans-serif; font-size:0.9rem; outline:none; cursor:pointer; appearance:none; -webkit-appearance:none; background-image:url('data:image/svg+xml;utf8,<svg fill=\"%231A1A1A\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7 10l5 5 5-5z\"/></svg>'); background-repeat:no-repeat; background-position:right 14px center; background-size:18px; box-sizing:border-box;">
                             <option value="">Seçiniz</option>
                             <option value="erkek">👔 Erkek Giyim</option>
                             <option value="kadin">🌸 Kadın Giyim</option>
@@ -289,7 +289,7 @@
                     </div>
                     <div>
                         <label style="display:block; font-size:0.78rem; font-weight:600; color:#1A1A1A; margin-bottom:6px; letter-spacing:0.5px;">BEDEN</label>
-                        <select style="width:100%; padding:14px 18px; border-radius:12px; border:1px solid rgba(0,0,0,0.1); background:#FFFFFE; color:#1A1A1A; font-family:'Inter',sans-serif; font-size:0.9rem; outline:none; cursor:pointer; appearance:none; -webkit-appearance:none; background-image:url('data:image/svg+xml;utf8,<svg fill=\"%231A1A1A\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7 10l5 5 5-5z\"/></svg>'); background-repeat:no-repeat; background-position:right 14px center; background-size:18px; box-sizing:border-box;">
+                        <select name="size" style="width:100%; padding:14px 18px; border-radius:12px; border:1px solid rgba(0,0,0,0.1); background:#FFFFFE; color:#1A1A1A; font-family:'Inter',sans-serif; font-size:0.9rem; outline:none; cursor:pointer; appearance:none; -webkit-appearance:none; background-image:url('data:image/svg+xml;utf8,<svg fill=\"%231A1A1A\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7 10l5 5 5-5z\"/></svg>'); background-repeat:no-repeat; background-position:right 14px center; background-size:18px; box-sizing:border-box;">
                             <option value="">Seçiniz</option>
                             <option value="xs">XS</option>
                             <option value="s">S</option>
@@ -310,11 +310,83 @@
                 </label>
                 <p class="kvkk-warn" style="display:none; color:#c0392b; font-size:0.75rem; margin:4px 0 12px;">⚠ Devam etmek için KVKK onayını vermeniz gerekmektedir.</p>
 
+                <!-- Hata mesajı -->
+                <p id="form-error" style="display:none; color:#c0392b; font-size:0.8rem; margin:8px 0; padding:10px 14px; background:rgba(192,57,43,0.06); border-radius:8px; text-align:center;"></p>
+
                 <!-- Kayıt Ol Butonu -->
-                <button type="submit" class="btn btn-primary" style="width:100%; padding:16px; min-height:52px; font-size:0.95rem; font-weight:700; letter-spacing:1px; margin-top:8px; transition:all 0.3s ease;">
-                    Üye Ol 🚀
+                <button type="submit" id="submit-btn" class="btn btn-primary" style="width:100%; padding:16px; min-height:52px; font-size:0.95rem; font-weight:700; letter-spacing:1px; margin-top:8px; transition:all 0.3s ease; position:relative;">
+                    <span id="btn-text">Üye Ol 🚀</span>
+                    <span id="btn-spinner" style="display:none; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);">
+                        <svg width="22" height="22" viewBox="0 0 24 24" style="animation: spin 0.8s linear infinite;"><circle cx="12" cy="12" r="10" stroke="#F5F2ED" stroke-width="3" fill="none" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg>
+                    </span>
                 </button>
             </form>
+
+            <script>
+            document.getElementById('membership-form').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const kvkk = document.getElementById('kvkk');
+                const warn = document.querySelector('.kvkk-warn');
+                const errorEl = document.getElementById('form-error');
+                const btn = document.getElementById('submit-btn');
+                const btnText = document.getElementById('btn-text');
+                const btnSpinner = document.getElementById('btn-spinner');
+
+                // KVKK kontrolü
+                if (!kvkk.checked) { warn.style.display = 'block'; return; }
+                warn.style.display = 'none';
+                errorEl.style.display = 'none';
+
+                // Double-submit koruması — buton kilitle + spinner
+                btn.disabled = true;
+                btn.style.opacity = '0.6';
+                btn.style.pointerEvents = 'none';
+                btnText.style.visibility = 'hidden';
+                btnSpinner.style.display = 'inline';
+
+                const formData = {
+                    name: this.querySelector('[name=name]').value,
+                    email: this.querySelector('[name=email]').value,
+                    phone: this.querySelector('[name=phone]').value,
+                    category: this.querySelector('[name=category]').value,
+                    size: this.querySelector('[name=size]').value
+                };
+
+                try {
+                    const res = await fetch('/api/register', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    });
+                    const data = await res.json();
+
+                    if (res.ok && data.success) {
+                        // Başarı — form gizle, başarı mesajı göster
+                        this.style.display = 'none';
+                        document.getElementById('form-success').style.display = 'flex';
+                    } else {
+                        // Hata mesajı göster
+                        errorEl.textContent = data.error || 'Bir hata oluştu.';
+                        errorEl.style.display = 'block';
+                        // Butonu geri aç
+                        btn.disabled = false;
+                        btn.style.opacity = '1';
+                        btn.style.pointerEvents = 'auto';
+                        btnText.style.visibility = 'visible';
+                        btnSpinner.style.display = 'none';
+                    }
+                } catch (err) {
+                    errorEl.textContent = 'Bağlantı hatası. Lütfen tekrar deneyin.';
+                    errorEl.style.display = 'block';
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                    btn.style.pointerEvents = 'auto';
+                    btnText.style.visibility = 'visible';
+                    btnSpinner.style.display = 'none';
+                }
+            });
+            </script>
 
             <!-- Başarı Mesajı -->
             <div id="form-success" style="display:none; flex-direction:column; align-items:center; text-align:center; padding:20px 0;">
@@ -342,6 +414,10 @@
 }
 #membership-form input::placeholder {
     color: #B0B0B0;
+}
+@keyframes spin {
+    0% { transform: translate(-50%,-50%) rotate(0deg); }
+    100% { transform: translate(-50%,-50%) rotate(360deg); }
 }
 </style>
 

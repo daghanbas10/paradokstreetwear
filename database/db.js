@@ -175,6 +175,19 @@ async function init() {
     )
   `);
 
+  // Üyelik tablosu
+  sqlDb.run(`
+    CREATE TABLE IF NOT EXISTS members (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      email TEXT UNIQUE NOT NULL,
+      phone TEXT,
+      category TEXT,
+      size TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+
   // ── Varsayılan site içeriklerini ekle ──────────────────────────
 
   const defaultContents = [

@@ -107,6 +107,15 @@ const apiLimiter = rateLimit({
   message: { error: 'API istek limiti aşıldı.' },
 });
 
+// Üyelik rate limit: 15 dakikada max 5 kayıt denemesi (bot koruması)
+const registerLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Çok fazla kayıt denemesi. Lütfen 15 dakika sonra tekrar deneyin.' },
+});
+
 // ── 3. HPP: HTTP Parameter Pollution koruması ───────────────────
 app.use(hpp());
 
@@ -177,6 +186,47 @@ app.set('views', path.join(__dirname, 'views'));
     app.use('/', apiRoutes);
     app.use('/admin/login', loginLimiter); // Login'e ayrı rate limit
     app.use('/', adminRoutes);
+
+    // ── Üyelik API (Rate Limited) ──────────────────────────────────
+    const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/;
+
+    app.post('/api/register', registerLimiter, (req, res) => {
+      try {
+        const { name, email, phone, category, size } = req.body;
+
+        // Validasyon
+        if (!name || !email) {
+          return res.status(400).json({ error: 'Ad ve e-posta zorunludur.' });
+        }
+        if (name.trim().length < 2 || name.trim().length > 100) {
+          return res.status(400).json({ error: 'Ad en az 2, en fazla 100 karakter olmalı.' });
+        }
+        if (!EMAIL_REGEX.test(email)) {
+          return res.status(400).json({ error: 'Geçerli bir e-posta adresi giriniz.' });
+        }
+
+        // Mükerrer kontrol
+        const existing = db.prepare('SELECT id FROM members WHERE email = ?').get(email.toLowerCase().trim());
+        if (existing) {
+          return res.status(409).json({ error: 'Bu e-posta adresi zaten kayıtlı.' });
+        }
+
+        // Kayıt
+        db.prepare('INSERT INTO members (name, email, phone, category, size) VALUES (?, ?, ?, ?, ?)').run(
+          name.trim(),
+          email.toLowerCase().trim(),
+          phone ? phone.trim() : null,
+          category || null,
+          size || null
+        );
+
+        console.log('[REGISTER] Yeni üye:', email);
+        res.status(201).json({ success: true, message: 'Başarıyla kaydoldun!' });
+      } catch (err) {
+        console.error('[REGISTER] Hata:', err.message);
+        res.status(500).json({ error: 'Sunucu hatası. Lütfen tekrar deneyin.' });
+      }
+    });
 
     // ── Hata yakalayıcıları ────────────────────────────────────────
 
