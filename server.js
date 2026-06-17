@@ -58,7 +58,7 @@ if (!fs.existsSync(uploadsDir)) {
 
 // ── Helmet: HTTP güvenlik başlıkları ─────────────────────
 // Render.com reverse proxy arkasında çalışıyoruz — trust proxy şart
-app.set('trust proxy', 1);────
+app.set('trust proxy', 1);
 // X-Content-Type-Options, X-Frame-Options, X-XSS-Protection,
 // Strict-Transport-Security, Content-Security-Policy vb.
 app.use(helmet({
