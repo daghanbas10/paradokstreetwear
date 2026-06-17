@@ -56,7 +56,9 @@ if (!fs.existsSync(uploadsDir)) {
 // GÜVENLİK MIDDLEWARE'LERİ
 // ══════════════════════════════════════════════════════════════════
 
-// ── 1. Helmet: HTTP güvenlik başlıkları ─────────────────────────
+// ── Helmet: HTTP güvenlik başlıkları ─────────────────────
+// Render.com reverse proxy arkasında çalışıyoruz — trust proxy şart
+app.set('trust proxy', 1);────
 // X-Content-Type-Options, X-Frame-Options, X-XSS-Protection,
 // Strict-Transport-Security, Content-Security-Policy vb.
 app.use(helmet({
@@ -139,14 +141,14 @@ app.use(express.static('public', {
 // Oturum yönetimi (güvenli ayarlarla)
 app.use(session({
   secret: process.env.SESSION_SECRET || 'paradoks-secret-key-2024-change-in-production',
-  resave: false,
+  resave: true,
   saveUninitialized: false,
-  name: 'paradoks.sid', // Varsayılan 'connect.sid' yerine özel isim
+  name: 'paradoks.sid',
   cookie: {
     maxAge: 24 * 60 * 60 * 1000, // 24 saat
-    httpOnly: true,               // JavaScript ile erişimi engelle (XSS koruması)
-    sameSite: 'lax',              // CSRF koruması
-    secure: process.env.NODE_ENV === 'production', // HTTPS zorunlu (production'da)
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
   }
 }));
 

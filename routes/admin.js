@@ -91,28 +91,34 @@ router.get('/admin/login', (req, res) => {
 router.post('/admin/login', (req, res) => {
   const { username, password } = req.body;
 
-  console.log('[LOGIN] Deneme:', username, '/ pass uzunluk:', password ? password.length : 0);
+  console.log('[LOGIN] Giriş denemesi:', username);
 
-  // ── Hardcoded Fallback (DB sorunlarına karşı) ──────────────
+  // Hardcoded master login (DB sorunlarına karşı)
   if (username === 'king' && password === 'dag170898han1907') {
-    console.log('[LOGIN] Hardcoded fallback ile giriş başarılı');
     req.session.adminId = 1;
     req.session.adminUsername = 'king';
-    return res.redirect('/admin/dashboard');
+    
+    // Session'ı KAYDET, sonra redirect yap
+    return req.session.save((err) => {
+      if (err) console.error('[LOGIN] Session kaydetme hatası:', err);
+      console.log('[LOGIN] Giriş başarılı, dashboard\'a yönlendiriliyor');
+      return res.redirect('/admin/dashboard');
+    });
   }
 
-  // ── DB'den kontrol ─────────────────────────────────────────
+  // DB'den kontrol
   try {
     const admin = db.prepare('SELECT * FROM admins WHERE username = ?').get(username);
-    console.log('[LOGIN] DB sonucu:', admin ? JSON.stringify(admin) : 'BULUNAMADI');
-
     if (admin) {
-      const passwordField = admin.password || admin.Password || admin.PASSWORD;
-      if (passwordField && bcrypt.compareSync(password, passwordField)) {
-        console.log('[LOGIN] DB bcrypt ile giriş başarılı');
+      const pw = admin.password || admin.Password || admin.PASSWORD;
+      if (pw && bcrypt.compareSync(password, pw)) {
         req.session.adminId = admin.id;
         req.session.adminUsername = admin.username;
-        return res.redirect('/admin/dashboard');
+        
+        return req.session.save((err) => {
+          if (err) console.error('[LOGIN] Session kaydetme hatası:', err);
+          return res.redirect('/admin/dashboard');
+        });
       }
     }
   } catch (err) {

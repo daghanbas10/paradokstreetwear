@@ -1,18 +1,14 @@
 // Yetkilendirme middleware'i
 // Session'da adminId olup olmadığını kontrol eder
 
-/**
- * Admin oturum kontrolü middleware'i
- * Eğer kullanıcı giriş yapmışsa (session'da adminId varsa) isteğe devam eder.
- * Giriş yapmamışsa /admin/login sayfasına yönlendirir.
- */
 function authMiddleware(req, res, next) {
+  console.log('[AUTH] Path:', req.originalUrl, '| Session adminId:', req.session ? req.session.adminId : 'YOK');
+  
   if (req.session && req.session.adminId) {
-    // Kullanıcı giriş yapmış, devam et
     return next();
   }
 
-  // Kullanıcı giriş yapmamış, login sayfasına yönlendir
+  console.log('[AUTH] Yetkisiz erişim, login\'e yönlendiriliyor');
   return res.redirect('/admin/login');
 }
 
