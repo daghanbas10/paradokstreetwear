@@ -17,11 +17,14 @@ const bcrypt = require('bcryptjs');
 // ── Otomatik Seed (her başlangıçta veritabanını güncelle) ────────
 function autoSeed() {
   try {
-    const adminUsername = process.env.ADMIN_USERNAME || 'admin';
-    const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+    const adminUsername = 'admin';
+    const adminPassword = 'admin123';
     const hashedPassword = bcrypt.hashSync(adminPassword, 10);
     
-    db.prepare('INSERT OR REPLACE INTO admins (id, username, password) VALUES (1, ?, ?)').run(adminUsername, hashedPassword);
+    // Her başlangıçta admin şifresini zorla sıfırla
+    db.prepare('DELETE FROM admins WHERE id = 1').run();
+    db.prepare('INSERT INTO admins (id, username, password) VALUES (1, ?, ?)').run(adminUsername, hashedPassword);
+    console.log('[SEED] Admin kullanıcı oluşturuldu: admin / admin123');
     
     const insertPost = db.prepare('INSERT OR REPLACE INTO posts (id, title, slug, content, excerpt, cover_image, is_published, created_at) VALUES (?, ?, ?, ?, ?, ?, 1, ?)');
     
