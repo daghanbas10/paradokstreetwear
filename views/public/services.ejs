@@ -1,16 +1,38 @@
 <%- include('../partials/header') %>
 
+<!-- Schema.org Product List -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "PARADOKS Yaz 2026 Koleksiyonu",
+    "description": "Oversize tişört, crop top, baby tee, cargo şort, jorts ve aksesuar. Erkek, kadın ve unisex streetwear.",
+    "url": "https://paradokstreetwear.onrender.com/koleksiyon",
+    "publisher": {
+        "@type": "Organization",
+        "name": "PARADOKS Streetwear"
+    }
+}
+</script>
+
 <!-- ===================== PAGE HERO ===================== -->
 <section class="page-hero section">
     <div class="container">
         <span class="section-tag">Yaz 2026</span>
         <h1 class="page-hero-title" style="color: #1A1A1A;">Yaz Koleksiyonu</h1>
         <p class="page-hero-subtitle" style="color: #6B6B6B;">Güneşin altında sokak stilinin en sıcak parçaları. Erkek, kadın ve aksesuar.</p>
+        <!-- Kategori Filtreleme Tab'ları -->
+        <div id="categoryTabs" style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:32px;">
+            <button class="cat-tab active" data-filter="all" style="padding:12px 28px; border-radius:50px; border:1.5px solid #1A1A1A; background:#1A1A1A; color:#F5F2ED; font-family:'Inter',sans-serif; font-size:0.9rem; font-weight:600; cursor:pointer; transition:all 0.3s ease;">Tümü</button>
+            <button class="cat-tab" data-filter="erkek" style="padding:12px 28px; border-radius:50px; border:1.5px solid rgba(0,0,0,0.15); background:transparent; color:#1A1A1A; font-family:'Inter',sans-serif; font-size:0.9rem; font-weight:600; cursor:pointer; transition:all 0.3s ease;">👔 Erkek</button>
+            <button class="cat-tab" data-filter="kadin" style="padding:12px 28px; border-radius:50px; border:1.5px solid rgba(0,0,0,0.15); background:transparent; color:#1A1A1A; font-family:'Inter',sans-serif; font-size:0.9rem; font-weight:600; cursor:pointer; transition:all 0.3s ease;">🌸 Kadın</button>
+            <button class="cat-tab" data-filter="aksesuar" style="padding:12px 28px; border-radius:50px; border:1.5px solid rgba(0,0,0,0.15); background:transparent; color:#1A1A1A; font-family:'Inter',sans-serif; font-size:0.9rem; font-weight:600; cursor:pointer; transition:all 0.3s ease;">🧢 Aksesuar</button>
+        </div>
     </div>
 </section>
 
 <!-- ===================== BÖLÜM 1: ERKEK GİYİM ===================== -->
-<section class="section">
+<section class="section category-section" data-category="erkek">
     <div class="container">
 
         <div class="section-header scroll-reveal" style="margin-top: 80px;">
@@ -130,7 +152,7 @@
 </section>
 
 <!-- ===================== BÖLÜM 2: KADIN GİYİM ===================== -->
-<section class="section">
+<section class="section category-section" data-category="kadin">
     <div class="container">
 
         <div class="section-header scroll-reveal" style="margin-top: 80px;">
@@ -215,12 +237,27 @@
                 <a href="/iletisim" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 16px; min-height: 48px; background: #1A1A1A; border-radius: 12px;">Sipariş Ver →</a>
             </div>
 
+            <!-- 13. Luxury Yırtmaçlı Şort -->
+            <div class="service-detail-card glass-card scroll-reveal">
+                <div class="service-detail-icon"><span class="service-emoji-lg">✨</span></div>
+                <h3 class="service-detail-title">Luxury Yırtmaçlı Şort</h3>
+                <p class="service-detail-desc">Premium saten dokulu kumaş, altın fermuar aksanı. Lüks sokak stili.</p>
+                <ul class="service-features">
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Premium saten kumaş</li>
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Altın fermuar detay</li>
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Yüksek bel, zarif yırtmaç</li>
+                </ul>
+                <p style="margin-top: 16px; font-size: 0.8rem; color: #6B6B6B;">🧺 30°C hassas yıkama • 🚫 Kurutma makinesi yok • Düşük ütü</p>
+                <img src="/uploads/summer-luxuryshorts.png" alt="PARADOKS Luxury Yırtmaçlı Şort Kadın Saten Siyah" style="width:100%; border-radius:14px; margin-top:20px;" loading="lazy">
+                <a href="/iletisim" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 16px; min-height: 48px; background: #1A1A1A; border-radius: 12px;">Sipariş Ver →</a>
+            </div>
+
         </div>
     </div>
 </section>
 
 <!-- ===================== BÖLÜM 3: AKSESUAR & ÖZEL ===================== -->
-<section class="section">
+<section class="section category-section" data-category="aksesuar">
     <div class="container">
 
         <div class="section-header scroll-reveal" style="margin-top: 80px;">
@@ -302,5 +339,99 @@
         </div>
     </div>
 </section>
+
+<!-- Skeleton Loading CSS + Kategori Filtre JS -->
+<style>
+/* Skeleton placeholder for images */
+.service-detail-card img {
+    background: linear-gradient(90deg, #f0ede8 25%, #e8e5e0 50%, #f0ede8 75%);
+    background-size: 200% 100%;
+    animation: skeletonShimmer 1.5s ease-in-out infinite;
+    min-height: 200px;
+    object-fit: cover;
+}
+.service-detail-card img[src] {
+    min-height: auto;
+}
+@keyframes skeletonShimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* CTA Button hover/active smooth transitions */
+.service-detail-card .btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative;
+    overflow: hidden;
+}
+.service-detail-card .btn:hover {
+    background: #333 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+.service-detail-card .btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Filter tab hover */
+.cat-tab:hover {
+    border-color: #1A1A1A !important;
+    background: rgba(0,0,0,0.04) !important;
+}
+.cat-tab.active {
+    background: #1A1A1A !important;
+    color: #F5F2ED !important;
+    border-color: #1A1A1A !important;
+}
+
+/* Category section transition */
+.category-section {
+    transition: opacity 0.4s ease, max-height 0.5s ease;
+}
+.category-section.hidden {
+    display: none;
+}
+</style>
+
+<script>
+// Kategori Filtreleme
+document.addEventListener('DOMContentLoaded', function() {
+    const tabs = document.querySelectorAll('.cat-tab');
+    const sections = document.querySelectorAll('.category-section');
+    
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const filter = this.dataset.filter;
+            
+            // Tab aktif durumu güncelle
+            tabs.forEach(t => {
+                t.classList.remove('active');
+                t.style.background = 'transparent';
+                t.style.color = '#1A1A1A';
+                t.style.borderColor = 'rgba(0,0,0,0.15)';
+            });
+            this.classList.add('active');
+            this.style.background = '#1A1A1A';
+            this.style.color = '#F5F2ED';
+            this.style.borderColor = '#1A1A1A';
+            
+            // Bölümleri göster/gizle
+            sections.forEach(section => {
+                if (filter === 'all' || section.dataset.category === filter) {
+                    section.classList.remove('hidden');
+                    section.style.opacity = '1';
+                } else {
+                    section.classList.add('hidden');
+                    section.style.opacity = '0';
+                }
+            });
+            
+            // Smooth scroll yukarı
+            window.scrollTo({ top: document.getElementById('categoryTabs').offsetTop - 100, behavior: 'smooth' });
+        });
+    });
+});
+</script>
 
 <%- include('../partials/footer') %>

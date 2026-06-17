@@ -3,14 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PARADOKS Streetwear — Yaz 2026 Koleksiyonu. Oversize tişört, crop top, cargo şort ve sokak modası. Tuzla/İstanbul.">
-    <meta name="keywords" content="streetwear, oversize tişört, sokak modası, crop top, cargo şort, PARADOKS, yaz koleksiyonu 2026">
+    <meta name="description" content="PARADOKS Streetwear — Yaz 2026 Koleksiyonu. Oversize tişört, crop top, cargo şort, baby tee, tenisçi eteği ve sokak modası. Tuzla/İstanbul.">
+    <meta name="keywords" content="streetwear, oversize tişört, sokak modası, crop top, cargo şort, baby tee, jorts, tenisçi eteği, PARADOKS, yaz koleksiyonu 2026, İstanbul streetwear">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="PARADOKS Streetwear">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%= typeof title !== 'undefined' ? title : 'PARADOKS Streetwear' %>">
+    <meta property="og:description" content="Yaz 2026 Koleksiyonu — Oversize tişört, crop top, cargo şort. Sokağın kurallarını sen yaz.">
+    <meta property="og:image" content="/uploads/summer-hero.png">
+    <meta property="og:locale" content="tr_TR">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= typeof title !== 'undefined' ? title : 'PARADOKS Streetwear' %>">
+    <meta name="twitter:description" content="Yaz 2026 Koleksiyonu — Sokağın kurallarını sen yaz.">
+    <meta name="twitter:image" content="/uploads/summer-hero.png">
     <title><%= typeof title !== 'undefined' ? title : 'PARADOKS Streetwear' %></title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◾</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=5.0">
+    <link rel="stylesheet" href="/css/style.css?v=6.0">
+    <!-- Schema.org Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "PARADOKS Streetwear",
+        "url": "https://paradokstreetwear.onrender.com",
+        "logo": "/uploads/summer-hero.png",
+        "description": "Sokak stilinin kurallarını yeniden yazan streetwear markası. Yaz 2026 Koleksiyonu.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Tuzla",
+            "addressRegion": "İstanbul",
+            "addressCountry": "TR"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "email": "info@paradoks.store"
+        }
+    }
+    </script>
 </head>
 <body>
     <!-- Duyuru Bandı -->
