@@ -183,6 +183,52 @@ app.set('views', path.join(__dirname, 'views'));
     const apiRoutes = require('./routes/api');
     const adminRoutes = require('./routes/admin');
 
+    // ══════════════════════════════════════════════════════════════
+    // BAKIM MODU — true = site kapalı, false = site açık
+    // ══════════════════════════════════════════════════════════════
+    const MAINTENANCE_MODE = true;
+
+    app.use((req, res, next) => {
+      // Admin paneli ve statik dosyalar her zaman erişilebilir
+      if (!MAINTENANCE_MODE || req.path.startsWith('/admin') || req.path.startsWith('/css') || req.path.startsWith('/js') || req.path.startsWith('/uploads') || req.path.startsWith('/fonts')) {
+        return next();
+      }
+      // Bakım sayfasını göster
+      return res.status(503).send(`<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PARADOKS — Bakımda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: #0F0E17; color: #FFFFFE; font-family: 'Outfit', sans-serif;
+      text-align: center; padding: 2rem;
+    }
+    .container { max-width: 520px; }
+    .lock { font-size: 4rem; margin-bottom: 1.5rem; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.8rem; background: linear-gradient(135deg, #6C63FF, #FF6584); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    p { color: #A7A9BE; font-size: 1rem; line-height: 1.7; margin-bottom: 0.5rem; }
+    .brand { margin-top: 2.5rem; color: #333; font-size: 0.75rem; letter-spacing: 3px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="lock">🔒</div>
+    <h1>Bakımdayız</h1>
+    <p>PARADOKS şu anda güncelleniyor.</p>
+    <p>Çok yakında geri döneceğiz. 2027'de sokakta buluşmak üzere.</p>
+    <div class="brand">◾ PARADOKS</div>
+  </div>
+</body>
+</html>`);
+    });
+
     app.use('/', publicRoutes);
     app.use('/api', apiLimiter); // API rotalarına ayrı rate limit
     app.use('/', apiRoutes);
